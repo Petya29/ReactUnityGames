@@ -15,10 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get('/', (req, res, next) => {
-    res.send('Hello from typescript!!!');
-});
-
 const start = () => {
     try {
         app.listen(PORT, () => {

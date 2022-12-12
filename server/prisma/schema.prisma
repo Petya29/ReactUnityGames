@@ -9,3 +9,48 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id               String             @id @default(uuid())
+  nickname         String
+  email            String             @unique
+  password         String
+  role             Role               @default(USER)
+  isActivated      Boolean            @default(false)
+  activationLink   String?
+  region           String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now()) @updatedAt
+  lang             Lang               @default(en)
+  refreshToken     Token[]
+  UserPasswordCode UserPasswordCode[]
+}
+
+model Token {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+}
+
+model UserPasswordCode {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  passwordCode String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Lang {
+  en
+  pl
+  ua
+}
