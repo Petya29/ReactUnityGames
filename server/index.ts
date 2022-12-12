@@ -1,7 +1,11 @@
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import router from './routes';
+import errorHandler from './middleware/error-handling.middleware';
+
+dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +18,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use('/api', router);
+app.use(errorHandler);
 
 const start = () => {
     try {
