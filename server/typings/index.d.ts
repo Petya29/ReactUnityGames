@@ -1,6 +1,6 @@
 declare global {
     namespace NodeJS {
-        interface ProcessEnv {
+        export interface ProcessEnv {
             PORT: string;
             API_URL: string;
             CLIENT_URL: StringLitera;
@@ -15,4 +15,8 @@ declare global {
     }
 }
 
-export { }
+declare module Express {
+    export interface Request {
+        user: any;
+    }
+}

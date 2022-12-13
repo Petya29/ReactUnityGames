@@ -1,4 +1,4 @@
-namespace Models {
+export namespace Models {
     export interface User {
         id: string;
         nickname: string;
@@ -8,8 +8,8 @@ namespace Models {
         isActivated: boolean;
         activationLink: string | null;
         region: string;
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         lang: 'en' | 'pl' | 'ua';
         refreshToken?: Token[]
         UserPasswordCode?: UserPasswordCode
@@ -20,8 +20,8 @@ namespace Models {
         userId: string;
         user?: User;
         refreshToken: string;
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
     }
 
     export interface UserPasswordCode {
@@ -29,7 +29,9 @@ namespace Models {
         userId: string;
         user?: User;
         passwordCode: string;
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
     }
+
+    export type Lang = 'en' | 'pl' | 'ua';
 }
