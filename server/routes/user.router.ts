@@ -5,6 +5,8 @@ import { registrationSchema } from "../validation/schemas";
 
 const userRouter = Router();
 
-userRouter.post('/registration', userController.registration);
+userRouter.post('/registration', validate(registrationSchema), userController.registration);
+
+userRouter.get('/activate/:link', userController.activate);
 
 export default userRouter;

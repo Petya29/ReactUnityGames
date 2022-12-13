@@ -39,6 +39,26 @@ class UserService {
 
         return newUser;
     }
+
+    async activate(activationLink: string) {
+        const user = await prisma.user.findFirst({
+            where: {
+                activationLink: activationLink
+            }
+        });
+        if (!user) {
+            throw ApiError.badRequest('Incorrect activation link', { msg: 'Incorrect activation link' });
+        }
+
+        return await prisma.user.update({
+            where: {
+                id: user.id
+            },
+            data: {
+                isActivated: true
+            }
+        });
+    }
 }
 
 export default new UserService();

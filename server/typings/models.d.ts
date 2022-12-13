@@ -4,13 +4,13 @@ export namespace Models {
         nickname: string;
         email: string;
         password: string;
-        role: 'USER' | 'ADMIN';
+        role: Role;
         isActivated: boolean;
         activationLink: string | null;
         region: string;
         createdAt: Date;
         updatedAt: Date;
-        lang: 'en' | 'pl' | 'ua';
+        lang: Lang;
         refreshToken?: Token[]
         UserPasswordCode?: UserPasswordCode
     }
@@ -33,5 +33,6 @@ export namespace Models {
         updatedAt: Date;
     }
 
+    export type Role = 'USER' | 'ADMIN';
     export type Lang = 'en' | 'pl' | 'ua';
 }

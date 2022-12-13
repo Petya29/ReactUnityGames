@@ -56,6 +56,17 @@ class UserController {
             next(e);
         }
     }
+
+    async activate(req: Request, res: Response, next: NextFunction) {
+        try {
+            const activationLink = req.params.link;
+            await UserService.activate(activationLink);
+
+            return res.redirect(process.env.CLIENT_URL as string);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new UserController();
