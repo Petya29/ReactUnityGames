@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import MailService from "../services/mail.service";
 import TokenService from "../services/token.service";
 import UserService from "../services/user.service";
 import { Models } from "../typings/models";
@@ -23,7 +24,9 @@ class UserController {
             } = req.body;
 
             const newUser = await UserService.registration(nickname, email, password, region, lang);
-            // TODO send mail
+
+            await MailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${newUser.activationLink}`);
+
             const tokens = TokenService.genereteJWT({
                 id: newUser.id,
                 nickname: newUser.nickname,
@@ -49,6 +52,7 @@ class UserController {
                 ...tokens
             });
         } catch (e) {
+            console.log(e);
             next(e);
         }
     }
