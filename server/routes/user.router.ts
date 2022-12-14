@@ -1,12 +1,13 @@
 import { Router } from "express";
-import userController from "../controllers/user.controller";
+import UserController from "../controllers/user.controller";
 import validate from "../validation";
-import { registrationSchema } from "../validation/schemas";
+import { loginSchema, registrationSchema } from "../validation/schemas";
 
 const userRouter = Router();
 
-userRouter.post('/registration', validate(registrationSchema), userController.registration);
+userRouter.post('/registration', validate(registrationSchema), UserController.registration);
+userRouter.post('/login', validate(loginSchema), UserController.login);
 
-userRouter.get('/activate/:link', userController.activate);
+userRouter.get('/activate/:link', UserController.activate);
 
 export default userRouter;

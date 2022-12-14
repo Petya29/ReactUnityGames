@@ -8,9 +8,13 @@ declare global {
             JWT_REFRESH_SECRET_KEY: string;
             JWT_ACCESS_EXPIRES_IN: string;
             JWT_REFRESH_EXPIRES_IN: string;
-            // TODO SMTP
+            SMTP_HOST: string;
+            SMTP_PORT: string;
+            SMTP_USER: string;
+            SMTP_PASSWORD: string;
             PASSWORD_CODE_TTL: string;
             DATABASE_URL: string;
+            DATABASE_LOG: string;
         }
     }
 }

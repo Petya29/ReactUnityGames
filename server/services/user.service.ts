@@ -1,4 +1,4 @@
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
 import { v4 } from "uuid";
 import ApiError from "../error/api.error";
 import prisma from "../prisma/prisma";
@@ -38,6 +38,30 @@ class UserService {
         });
 
         return newUser;
+    }
+
+    async login(email: string, password: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        });
+        if (!user) {
+            throw ApiError.badRequest('User with this email not found', {
+                msg: 'User with this email not found',
+                param: 'email'
+            });
+        }
+
+        const isPasswordEquals = await compare(password, user.password);
+        if (!isPasswordEquals) {
+            throw ApiError.badRequest('Password does not match', {
+                msg: 'Password does not match',
+                param: 'password'
+            });
+        }
+
+        return user;
     }
 
     async activate(activationLink: string) {

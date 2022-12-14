@@ -52,7 +52,40 @@ class UserController {
                 ...tokens
             });
         } catch (e) {
-            console.log(e);
+            next(e);
+        }
+    }
+
+    async login(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { email, password }: { email: string, password: string } = req.body;
+
+            const userData = await UserService.login(email, password);
+
+            const tokens = TokenService.genereteJWT({
+                id: userData.id,
+                nickname: userData.nickname,
+                email: userData.email,
+                isActivated: userData.isActivated,
+                role: userData.role,
+                region: userData.region,
+                lang: userData.lang
+            });
+            await TokenService.saveToken(userData.id, tokens.refreshToken);
+
+            res.cookie(
+                'refreshToken',
+                tokens.refreshToken,
+                {
+                    maxAge: THIRTY_DAYS,
+                    httpOnly: true
+                });
+
+            return res.json({
+                user: userData,
+                ...tokens
+            });
+        } catch (e) {
             next(e);
         }
     }
