@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "8a9d85b6-d503-4927-b23d-eb42e8c4997c",
+		"name": "ReactUnityGames",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13230528"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "/api/user/registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nickname",
+									"value": "Petya Avramenko 3",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "petya239avramenko@gmail.com",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "123123123",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "region",
+									"value": "ua",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/registration",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/user/activate/:link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/activate/:link",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"activate",
+								":link"
+							],
+							"variable": [
+								{
+									"key": "link",
+									"value": "63a303ed-ebf9-4905-b469-4d8672c51adf",
+									"description": "required"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/user/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "petya29avramenko@gmail.com",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
