@@ -1,0 +1,21 @@
+.rippleContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.rippleContainer span {
+    transform: scale(0);
+    border-radius: 100%;
+    position: absolute;
+    animation-name: ripple;
+}
+
+@keyframes ripple {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
