@@ -1,3 +1,4 @@
+import { UserIcon } from "../ui/icons/UserIcon";
 import { AppBar } from "../ui/surfaces";
 
 export const NavBar = () => {
@@ -8,7 +9,7 @@ export const NavBar = () => {
                     SiteName
                 </div>
                 <div>
-                    Login/Register
+                    <UserIcon className="cursor-pointer" size="lg" />
                 </div>
             </div>
         </AppBar>
