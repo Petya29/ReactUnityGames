@@ -7,6 +7,7 @@ const userRouter = Router();
 
 userRouter.post('/registration', validate(registrationSchema), UserController.registration);
 userRouter.post('/login', validate(loginSchema), UserController.login);
+userRouter.post('/logout', UserController.logout);
 
 userRouter.get('/activate/:link', UserController.activate);
 

@@ -72,6 +72,31 @@ class TokenService {
             return null;
         }
     }
+
+    async validateRefreshToken(refreshToken: string) {
+        try {
+            return verify(refreshToken, process.env.JWT_REFRESH_SECRET_KEY as string);
+        } catch (e) {
+            await this.removeRefreshToken(refreshToken);
+            return null;
+        }
+    }
+
+    async removeRefreshToken(refreshToken: string) {
+        return await prisma.token.deleteMany({
+            where: {
+                refreshToken: refreshToken
+            }
+        });
+    }
+
+    async removeAllUserTokens(userId: string) {
+        return await prisma.token.deleteMany({
+            where: {
+                userId: userId
+            }
+        });
+    }
 }
 
 export default new TokenService();

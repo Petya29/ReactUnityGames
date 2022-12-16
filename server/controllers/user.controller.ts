@@ -100,6 +100,23 @@ class UserController {
             next(e);
         }
     }
+
+    async logout(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { refreshToken }: { refreshToken: string } = req.cookies;
+            if (!refreshToken) return res.json(null); 
+            
+            const userData = await TokenService.validateRefreshToken(refreshToken);
+            if (!userData || typeof userData === 'string') return res.json(null); 
+            const token = await TokenService.removeAllUserTokens(userData.id);
+            
+            res.clearCookie('refreshToken');
+
+            return res.json(token);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new UserController();
