@@ -83,6 +83,14 @@ class UserService {
             }
         });
     }
+
+    async getUser(id: string) {
+        return await prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        });
+    }
 }
 
 export default new UserService();

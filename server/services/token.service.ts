@@ -97,6 +97,14 @@ class TokenService {
             }
         });
     }
+
+    async findRefreshToken(refreshToken: string) {
+        return await prisma.token.findFirst({
+            where: {
+                refreshToken: refreshToken
+            }
+        });
+    }
 }
 
 export default new TokenService();

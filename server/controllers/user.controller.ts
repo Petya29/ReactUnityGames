@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import ApiError from "../error/api.error";
 import MailService from "../services/mail.service";
 import TokenService from "../services/token.service";
 import UserService from "../services/user.service";
@@ -104,15 +105,55 @@ class UserController {
     async logout(req: Request, res: Response, next: NextFunction) {
         try {
             const { refreshToken }: { refreshToken: string } = req.cookies;
-            if (!refreshToken) return res.json(null); 
-            
+            if (!refreshToken) return res.json(null);
+
             const userData = await TokenService.validateRefreshToken(refreshToken);
-            if (!userData || typeof userData === 'string') return res.json(null); 
+            if (!userData || typeof userData === 'string') return res.json(null);
             const token = await TokenService.removeAllUserTokens(userData.id);
-            
+
             res.clearCookie('refreshToken');
 
             return res.json(token);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async refresh(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { refreshToken }: { refreshToken: string } = req.cookies;
+            if (!refreshToken) throw ApiError.unauthorizedError();
+
+            const userData = await TokenService.validateRefreshToken(refreshToken);
+            const tokenFromDb = await TokenService.findRefreshToken(refreshToken);
+            if (!userData || typeof userData === 'string' || !tokenFromDb) throw ApiError.unauthorizedError();
+
+            const user = await UserService.getUser(userData.id);
+            if (!user) throw ApiError.unauthorizedError();
+
+            const tokens = TokenService.genereteJWT({
+                id: user.id,
+                nickname: user.nickname,
+                email: user.email,
+                isActivated: user.isActivated,
+                role: user.role,
+                region: user.region,
+                lang: user.lang
+            });
+            await TokenService.saveToken(user.id, tokens.refreshToken, tokenFromDb.id);
+
+            res.cookie(
+                'refreshToken',
+                tokens.refreshToken,
+                {
+                    maxAge: THIRTY_DAYS,
+                    httpOnly: true
+                });
+
+            return res.json({
+                user: user,
+                ...tokens
+            });
         } catch (e) {
             next(e);
         }
