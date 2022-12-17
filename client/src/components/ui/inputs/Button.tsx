@@ -12,7 +12,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     disableRipple,
     rippleProps,
     className,
-    children
+    children,
+    ...rest
 }, ref) => {
     return (
         <button
@@ -35,6 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                 'active:left-2',
                 className
             ].join(' ').trim()}
+            {...rest}
         >
             <div className="flex justify-center items-center">
                 {children}

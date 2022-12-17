@@ -1,6 +1,11 @@
 import { Button } from "../components/ui/inputs"
 
 export const Home = () => {
+
+    const handleclick = () => {
+        console.log('click')
+    }
+
     return (
         <div className="w-3/4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-center text-white">
             <h1 className="font-semibold text-7xl">Game on!</h1>
@@ -10,7 +15,7 @@ export const Home = () => {
                 similique eaque recusandae commodi natus?
             </div>
             <div>
-                <Button>
+                <Button onClick={handleclick}>
                     Go game
                 </Button>
             </div>
