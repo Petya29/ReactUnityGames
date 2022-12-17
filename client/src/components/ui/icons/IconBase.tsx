@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { CSSProperties, HTMLAttributes } from "react";
 import { Ripple, RippleProps } from "../utils";
 
 enum IconSizes {
@@ -11,6 +11,7 @@ export type IconBaseProps = {
     size?: keyof typeof IconSizes,
     fill?: string,
     strokeColor?: string,
+    strokeWidth?: CSSProperties['strokeWidth'],
     isHoverable?: boolean,
     disableRipple?: boolean,
     rippleProps?: RippleProps,
@@ -20,6 +21,7 @@ export const IconBase = ({
     size = 'md',
     fill = 'none',
     strokeColor = 'currentcolor',
+    strokeWidth = '2px',
     isHoverable = true,
     disableRipple = false,
     rippleProps,
@@ -46,7 +48,7 @@ export const IconBase = ({
                 xmlns="http://www.w3.org/2000/svg"
                 fill={fill}
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth={strokeWidth}
                 stroke={strokeColor}
                 className={IconSizes[size]}
             >
