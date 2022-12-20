@@ -1,11 +1,14 @@
-import { NavBar } from "./components/partials/NavBar"
-import { Home } from "./pages/Home"
+import { BrowserRouter } from "react-router-dom";
+import { NavBar } from "./components/partials/NavBar";
+import { AppRouter } from "./router/AppRouter";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Home />
+      <BrowserRouter>
+        <NavBar />
+        <AppRouter />
+      </BrowserRouter>
     </div>
   )
 }
