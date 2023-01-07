@@ -1,5 +1,5 @@
 import { CSSProperties, MouseEvent, useLayoutEffect, useState } from "react";
-import './Ripple.css';
+import classes from './Ripple.module.css';
 
 type useDebouncedRippleCleanUpProps = {
     rippleCount: number,
@@ -64,7 +64,7 @@ export const Ripple = ({ duration = 1000, opacity = .5, backgroundColor = '#ffff
 
     return (
         <div
-            className="rippleContainer"
+            className={classes.rippleContainer}
             onMouseDown={addRipple}
         >
             {rippleArray.length > 0 &&
