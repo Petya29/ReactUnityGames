@@ -1,0 +1,73 @@
+/* Outlined */
+.select-lg-outlined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-3 scale-75;
+}
+
+.select-lg-outlined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-3 scale-75;
+}
+
+.select-lg-outlined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-3 scale-75;
+}
+
+.select-md-outlined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-3 scale-75;
+}
+
+.select-md-outlined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-3 scale-75;
+}
+
+.select-md-outlined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-3 scale-75;
+}
+
+.select-sm-outlined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-3 scale-75;
+}
+
+.select-sm-outlined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-3 scale-75;
+}
+
+.select-sm-outlined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-3 scale-75;
+}
+
+/* Lined */
+.select-lg-lined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-[2.2rem] scale-75;
+}
+
+.select-lg-lined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-[2.2rem] scale-75;
+}
+
+.select-lg-lined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-7 -translate-x-[2.2rem] scale-75;
+}
+
+.select-md-lined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-8 scale-75;
+}
+
+.select-md-lined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-8 scale-75;
+}
+
+.select-md-lined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-5 -translate-x-8 scale-75;
+}
+
+.select-sm-lined:focus~.empty-input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-[1.7rem] scale-75;
+}
+
+.select-sm-lined:focus~.input-label {
+    @apply text-[#d200fa] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-[1.7rem] scale-75;
+}
+
+.select-sm-lined~.input-label {
+    @apply text-[#ffffff80] bg-[#1e1e1ebf] transform -translate-y-4 -translate-x-[1.7rem] scale-75;
+}
