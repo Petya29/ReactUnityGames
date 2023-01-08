@@ -14,6 +14,7 @@ enum Sizes {
 }
 
 type TextFieldProps = {
+    name?: string,
     type?: HTMLInputTypeAttribute,
     label?: string,
     value: any,
@@ -25,6 +26,7 @@ type TextFieldProps = {
 } & HTMLAttributes<HTMLInputElement>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({
+    name,
     type = "text",
     label,
     value,
@@ -44,6 +46,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({
                 <input
                     ref={ref}
                     type={type}
+                    name={name}
                     className={[
                         variant === "outlined" ? "border rounded-md" : "border-b-2",
                         splittedSizes[0],
