@@ -1,25 +1,9 @@
-import { useState } from "react";
-import { Button, Select, SelectOption } from "../components/ui/inputs";
-
-const options = [
-    { label: 'TypeScript', value: 'TypeScript' },
-    { label: 'JavaScript', value: 'JavaScript' },
-    { label: 'Python', value: 'Python' },
-    { label: 'PHP', value: 'PHP' },
-    { label: 'C#', value: 'C#' },
-    { label: 'C++', value: 'C++' }
-]
+import { Button} from "../components/ui/inputs";
 
 export const Home = () => {
 
-    const [value, setValue] = useState<SelectOption | undefined>();
-
     const handleclick = () => {
         console.log('click')
-    }
-
-    const handleChangeSelect = (option: SelectOption | undefined) => {
-        setValue(option);
     }
 
     return (
@@ -35,14 +19,6 @@ export const Home = () => {
                     Go game
                 </Button>
             </div>
-            <Select
-                className="mt-10"
-                label="Choose your language"
-                variant="outlined"
-                value={value}
-                options={options}
-                onChange={(option) => handleChangeSelect(option as SelectOption | undefined)}
-            />
         </div>
     )
 }

@@ -24,10 +24,12 @@ type SelectProps = {
     label?: string,
     clearable?: boolean,
     defaultOpen?: boolean,
-    fullWitdth?: boolean,
+    hideArrow?: boolean,
+    fullWidth?: boolean,
     variant?: "outlined" | "lined",
     maxListHeight?: CSSProperties["maxHeight"],
     size?: keyof typeof Sizes,
+    iconSize?: keyof typeof Sizes | null,
     listStyles?: CSSProperties,
     listItemStyles?: CSSProperties,
     onChange: (option: SelectOption | undefined) => void
@@ -39,10 +41,12 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({
     label,
     clearable = false,
     defaultOpen = false,
-    fullWitdth = false,
+    hideArrow = false,
+    fullWidth = false,
     variant = "outlined",
     maxListHeight = 250,
     size = "md",
+    iconSize = null,
     listStyles,
     listItemStyles,
     className,
@@ -185,7 +189,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({
                     "placeholder-transparent",
                     "focus:border-[#d200fa]",
                     "transition duration-200",
-                    fullWitdth ? "w-full" : "",
+                    fullWidth ? "w-full" : "",
                     className
                 ].join(" ").trim()}
                 onClick={toggleOpen}
@@ -201,28 +205,31 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({
                             <XMarkIcon
                                 disableRipple
                                 isHoverable={false}
-                                size={size}
+                                size={iconSize ? iconSize : size}
                                 onClick={e => handleClear(e)}
                             />
                         </span>
+                        {!hideArrow &&
+                            <span>
+                                <ArrowDownIcon
+                                    className={`transition duration-200 ${open ? "rotate-180" : ""}`}
+                                    disableRipple
+                                    isHoverable={false}
+                                    size={iconSize ? iconSize : size}
+                                />
+                            </span>
+                        }
+                    </div>
+                    :
+                    (!hideArrow &&
                         <span>
                             <ArrowDownIcon
                                 className={`transition duration-200 ${open ? "rotate-180" : ""}`}
                                 disableRipple
                                 isHoverable={false}
-                                size={size}
+                                size={iconSize ? iconSize : size}
                             />
-                        </span>
-                    </div>
-                    :
-                    <span>
-                        <ArrowDownIcon
-                            className={`transition duration-200 ${open ? "rotate-180" : ""}`}
-                            disableRipple
-                            isHoverable={false}
-                            size={size}
-                        />
-                    </span>
+                        </span>)
                 }
                 {open &&
                     <ul

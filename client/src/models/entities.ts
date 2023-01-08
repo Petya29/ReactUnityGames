@@ -29,4 +29,9 @@ export interface UserPasswordCode {
 }
 
 export type Role = 'USER' | 'ADMIN';
-export type Lang = 'en' | 'pl' | 'ua';
+
+export enum Lang {
+    en = 'en',
+    pl = 'pl',
+    ua = 'ua'
+}
