@@ -58,6 +58,7 @@ export const NavBar = () => {
                 </div>
                 <div className="text-xl flex justify-between items-end h-8 gap-5">
                     <Select
+                        label="label"
                         className="!bg-transparent w-16"
                         variant="lined"
                         iconSize="sm"

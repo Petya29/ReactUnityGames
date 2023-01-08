@@ -32,6 +32,7 @@ type SelectProps = {
     iconSize?: keyof typeof Sizes | null,
     listStyles?: CSSProperties,
     listItemStyles?: CSSProperties,
+    labelStyles?: CSSProperties,
     onChange: (option: SelectOption | undefined) => void
 } & HTMLAttributes<HTMLDivElement>
 
@@ -49,6 +50,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({
     iconSize = null,
     listStyles,
     listItemStyles,
+    labelStyles,
     className,
     onChange,
     onClick,
@@ -292,6 +294,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({
                         "pointer-events-none",
                         "transition duration-200"
                     ].join(" ")}
+                    style={labelStyles}
                 >
                     {label}
                 </span>
