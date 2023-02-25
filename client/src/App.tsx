@@ -19,7 +19,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
-        <AppRouter />
+        <main>
+          <AppRouter />
+        </main>
       </BrowserRouter>
     </div>
   )

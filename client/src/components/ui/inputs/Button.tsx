@@ -1,5 +1,4 @@
-import { ButtonHTMLAttributes, CSSProperties, forwardRef, ReactNode } from "react";
-import { ArrowLeftIcon } from "../icons";
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 import { Ripple, RippleProps } from "../utils";
 
 type ButtonProps = {
@@ -24,31 +23,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                 'text-black',
                 'uppercase',
                 'font-semibold',
-                'bg-white',
-                'w-36',
-                'h-14',
+                'bg-[#90caf9]',
+                'hover:bg-[#42a5f5]',
                 'transition-all',
-                'shadow-btn',
-                'top-0',
-                'left-0',
-                'active:shadow-btn-active',
-                'active:top-2',
-                'active:left-2',
+                'rounded-[4px]',
+                'px-2 py-1',
                 className
             ].join(' ').trim()}
             {...rest}
         >
-            <div className="flex justify-center items-center">
-                {children}
-                <ArrowLeftIcon
-                    isHoverable={false}
-                    disableRipple={true}
-                    size="sm"
-                    strokeColor="#d200fa"
-                    strokeWidth="4px"
-                />
-            </div>
-            {!disableRipple && <Ripple {...rippleProps} backgroundColor='#d200fa' />}
+            {children}
+            {!disableRipple && <Ripple {...rippleProps} backgroundColor='#0000006b' />}
         </button>
     )
 })

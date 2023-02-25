@@ -1,13 +1,6 @@
-import { ChangeEvent, useState } from "react";
-import { Button, TextField } from "../components/ui/inputs";
+import { ActionButton } from "../components/ui/inputs";
 
 export const Home = () => {
-
-    const [value, setValue] = useState<string>('');
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-    }
 
     const handleclick = () => {
         console.log('click')
@@ -22,17 +15,9 @@ export const Home = () => {
                 similique eaque recusandae commodi natus?
             </div>
             <div>
-                <Button onClick={handleclick}>
+                <ActionButton onClick={handleclick}>
                     Go game
-                </Button>
-            </div>
-            <div className="flex align-middle justify-center mt-20">
-                <TextField
-                    label="name"
-                    variant="outlined"
-                    value={value}
-                    onChange={handleChange}
-                />
+                </ActionButton>
             </div>
         </div>
     )

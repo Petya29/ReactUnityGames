@@ -35,6 +35,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({
     styles,
     inputStyles,
     labelStyles,
+    className,
     ...rest
 }: TextFieldProps, ref) => {
 
@@ -60,7 +61,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({
                         "placeholder-transparent",
                         "focus:placeholder-[#ffffff80]",
                         "focus:border-[#d200fa]",
-                        "transition duration-200"
+                        "transition duration-200",
+                        className
                     ].join(" ")}
                     style={inputStyles}
                     {...rest}

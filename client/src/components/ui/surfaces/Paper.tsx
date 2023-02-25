@@ -40,8 +40,8 @@ export const Paper = forwardRef<HTMLElement, PaperProps>(({
             className={[
                 Shadows[shadow],
                 Rounds[rounded],
-                'bg-[#1e1e1e]',
-                'p-2',
+                "bg-[#1e1e1e]",
+                "p-2",
                 className
             ].join(' ').trim()}
             {...rest}
