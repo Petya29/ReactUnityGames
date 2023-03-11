@@ -8,6 +8,7 @@ import { Lang } from "../../models/entities";
 import { useLocalStorage } from "../../hooks/use-local-storage";
 import { i18n } from "../../lib";
 import { logout } from "../../store/slices/authSlice";
+import { setSnackbar } from "../../store/slices/utilsSlice";
 
 const languageSelectOption: SelectOption[] = Object.entries(Lang).map(([label, value]) => ({ label, value }));
 
@@ -40,7 +41,17 @@ export const NavBar = () => {
     }
 
     const handleClickLogout = () => {
-        dispatch(logout());
+        dispatch(logout())
+            .unwrap()
+            .catch((originalPromiseResult) => {
+                if (originalPromiseResult === 'Unexpected error') {
+                    dispatch(setSnackbar({
+                        open: true,
+                        severity: 'error',
+                        text: 'Unexpected error'
+                    }));
+                }
+            });
     }
 
     return (

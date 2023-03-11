@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { NavBar } from "./components/partials/NavBar";
+import { MainTheme } from "./components/theme/MainTheme";
 import { useLocalStorage } from "./hooks/use-local-storage";
 import { i18n } from "./lib";
 import { Lang } from "./models/entities";
@@ -18,10 +19,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
-        <main>
+        <MainTheme>
           <AppRouter />
-        </main>
+        </MainTheme>
       </BrowserRouter>
     </div>
   )

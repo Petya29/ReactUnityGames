@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { FormikHelpers } from "formik";
 import { login } from "../store/slices/authSlice";
 import { i18n } from "../lib";
+import { setSnackbar } from "../store/slices/utilsSlice";
 
 interface LoginFormFields {
     email: string,
@@ -48,7 +49,15 @@ export function useLoginForm() {
                 navigate('/news');
             })
             .catch((error) => {
-                if (error.param) onSubmitProps.setErrors({ [error.param]: error.msg });
+                if (error === 'Unexpected error') {
+                    dispatch(setSnackbar({
+                        open: true,
+                        severity: 'error',
+                        text: 'Unexpected error'
+                    }));
+                } else if (error.param) {
+                    onSubmitProps.setErrors({ [error.param]: error.msg });
+                }
             });
     }
 

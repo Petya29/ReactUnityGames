@@ -30,5 +30,6 @@ export const utilsSlice = createSlice({
 
 export default utilsSlice.reducer;
 export const {
-
+    setMode,
+    setSnackbar
 } = utilsSlice.actions;
