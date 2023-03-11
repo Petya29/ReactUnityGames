@@ -29,13 +29,13 @@ export function useLoginForm() {
         email: yup
             .string()
             .trim()
-            .email(t("Enter a valid email") as string)
+            .email(t('Enter a valid email') as string)
             .required(t('Email is required') as string),
         password: yup
             .string()
             .trim()
-            .min(4, t('Password must be at least 4 and no more than 16 characters') as string)
-            .max(16, t('Password must be at least 4 and no more than 16 characters') as string)
+            .min(8, t('Password must be at least 8 and no more than 32 characters') as string)
+            .max(32, t('Password must be at least 8 and no more than 32 characters') as string)
             .required(t('Password is required') as string)
     });
 
