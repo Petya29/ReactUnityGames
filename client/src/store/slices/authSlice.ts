@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../models/entities";
 import { AuthResponse } from "../../models/responses";
-import { loginAPI, logoutAPI } from "../../services/AuthService";
+import { loginAPI, logoutAPI, registrationAPI } from "../../services/AuthService";
 
 interface AuthState {
     user: User,
@@ -24,6 +24,32 @@ const initialState: AuthState = {
     isAuthLoading: false,
     isAuthChecking: false
 }
+
+export const registration = createAsyncThunk(
+    'auth/registration',
+    async ({
+        nickname,
+        email,
+        password,
+        confirmPassword,
+        region,
+        lang
+    }: {
+        nickname: string,
+        email: string,
+        password: string,
+        confirmPassword: string,
+        region: string,
+        lang: string
+    }, { rejectWithValue }) => {
+        try {
+            const response = await registrationAPI(nickname, email, password, confirmPassword, region, lang);
+            return response.data;
+        } catch (e: any) {
+            return rejectWithValue(e.response?.data?.errors || 'Unexpected error');
+        }
+    }
+);
 
 export const login = createAsyncThunk(
     'auth/login',
@@ -58,19 +84,23 @@ export const authSlice = createSlice({
             localStorage.removeItem('token');
             return initialState;
         });
-        builder.addMatcher(isAnyOf(login.fulfilled), (state, action: PayloadAction<AuthResponse>) => {
+        builder.addMatcher(isAnyOf(registration.fulfilled, login.fulfilled), (state, action: PayloadAction<AuthResponse>) => {
             const { user, accessToken } = action.payload;
 
             state.user = user;
             state.isAuth = true;
             state.isAuthLoading = false;
+            state.authError = {
+                isError: true,
+                msg: ''
+            };
 
             localStorage.setItem('token', accessToken);
         });
-        builder.addMatcher(isAnyOf(login.pending, logout.pending), (state) => {
+        builder.addMatcher(isAnyOf(registration.pending, login.pending, logout.pending), (state) => {
             state.isAuthLoading = true;
         });
-        builder.addMatcher(isAnyOf(login.rejected, logout.rejected), (state) => {
+        builder.addMatcher(isAnyOf(registration.rejected, login.rejected, logout.rejected), (state) => {
             state.isAuthLoading = false;
             state.authError = {
                 isError: true,

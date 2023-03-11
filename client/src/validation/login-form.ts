@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 import { FormikHelpers } from "formik";
 import { login } from "../store/slices/authSlice";
 import { i18n } from "../lib";
@@ -18,8 +18,6 @@ export function useLoginForm() {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-
-    const { user } = useAppSelector(state => state.auth);
 
     const loginInitialValues: LoginFormFields = {
         email: '',

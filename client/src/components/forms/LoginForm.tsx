@@ -78,7 +78,7 @@ export const LoginForm = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link component={routerLink} to="/register" variant="body2">
+                <Link component={routerLink} to="/registration" variant="body2">
                   {t("Don't have an account? Sign Up")}
                 </Link>
               </Grid>

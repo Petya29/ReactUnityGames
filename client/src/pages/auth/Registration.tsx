@@ -1,5 +1,9 @@
+import { RegistrationForm } from "../../components/forms/RegistrationForm"
+
 export const Registration = () => {
   return (
-    <div>Registration</div>
+    <div className="w-full mt-8 flex justify-center">
+      <RegistrationForm />
+    </div>
   )
 }
