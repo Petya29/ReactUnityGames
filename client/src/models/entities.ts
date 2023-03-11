@@ -28,7 +28,14 @@ export interface UserPasswordCode {
     updatedAt: Date;
 }
 
+export interface Snackbar {
+    text: string,
+    severity: 'error' | 'info' | 'success' | 'warning',
+    open: boolean
+}
+
 export type Role = 'USER' | 'ADMIN';
+export type Mode = 'dark' | 'light';
 
 export enum Lang {
     en = 'en',
