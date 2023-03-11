@@ -3,5 +3,10 @@
     "Games": "Gry",
     "News": "Aktualności",
     "Log in": "Logowanie",
-    "Sign up": "Rejestracja"
+    "Sign up": "Rejestracja",
+    "password": "hasło",
+    "Forgot password?": "Zapomniałeś hasła?",
+    "Don't have an account? Sign Up": "Nie masz konta? Zapisać się",
+    "Logout": "Wyloguj",
+    "Unexpected error": "Niespodziewany błąd"
 }

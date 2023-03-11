@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { UserIcon } from "../ui/icons";
 import { AppBar } from "../ui/surfaces";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Select, SelectOption } from "../ui/inputs";
 import { Lang } from "../../models/entities";
 import { useLocalStorage } from "../../hooks/use-local-storage";
 import { i18n } from "../../lib";
+import { logout } from "../../store/slices/authSlice";
 
 const languageSelectOption: SelectOption[] = Object.entries(Lang).map(([label, value]) => ({ label, value }));
 
 export const NavBar = () => {
 
     const { t } = useTranslation();
+
+    const dispatch = useAppDispatch();
 
     const { isAuth, user } = useAppSelector(state => state.auth);
 
@@ -35,6 +37,10 @@ export const NavBar = () => {
             setCurrentLanguage(option);
             setStorageLanguage(option.value as Lang);
         });
+    }
+
+    const handleClickLogout = () => {
+        dispatch(logout());
     }
 
     return (
@@ -67,7 +73,7 @@ export const NavBar = () => {
                     />
                     {isAuth
                         ?
-                        <UserIcon className="cursor-pointer" size="lg" />
+                        <span className="cursor-pointer" onClick={handleClickLogout}>{t('Logout')}</span>
                         :
                         <div className="flex gap-5">
                             <Link to={'/login'}>

@@ -10,3 +10,7 @@ export const loginAPI = async (email: string, password: string): Promise<AxiosRe
         password: password
     });
 };
+
+export const logoutAPI = async (): Promise<AxiosResponse<number | null>> => {
+    return await API.post<number | null>(`${API_URL}/user/logout`);
+}

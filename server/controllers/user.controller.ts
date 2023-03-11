@@ -109,11 +109,11 @@ class UserController {
 
             const userData = await TokenService.validateRefreshToken(refreshToken);
             if (!userData || typeof userData === 'string') return res.json(null);
-            const token = await TokenService.removeAllUserTokens(userData.id);
+            const tokenData = await TokenService.removeAllUserTokens(userData.id);
 
             res.clearCookie('refreshToken');
 
-            return res.json(token);
+            return res.json(tokenData.count);
         } catch (e) {
             next(e);
         }

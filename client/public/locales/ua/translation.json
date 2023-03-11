@@ -3,5 +3,10 @@
     "Games": "Ігри",
     "News": "Новини",
     "Log in": "Вхід",
-    "Sign up": "Реєстрація"
+    "Sign up": "Реєстрація",
+    "password": "пароль",
+    "Forgot password?": "Забули пароль?",
+    "Don't have an account? Sign Up": "Немає облікового запису? Зареєструйся",
+    "Logout": "Вийти",
+    "Unexpected error": "Неочікувана помилка"
 }
