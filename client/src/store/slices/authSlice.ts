@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../models/entities";
 import { AuthResponse } from "../../models/responses";
-import { loginAPI, logoutAPI, registrationAPI } from "../../services/AuthService";
+import { loginAPI, logoutAPI, refreshAuthAPI, registrationAPI } from "../../services/AuthService";
 
 interface AuthState {
     user: User,
@@ -22,7 +22,7 @@ const initialState: AuthState = {
     },
     isAuth: false,
     isAuthLoading: false,
-    isAuthChecking: false
+    isAuthChecking: true
 }
 
 export const registration = createAsyncThunk(
@@ -63,6 +63,18 @@ export const login = createAsyncThunk(
     }
 );
 
+export const refreshAuth = createAsyncThunk(
+    'auth/refreshAuth',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await refreshAuthAPI();
+            return response.data;
+        } catch (e: any) {
+            return rejectWithValue(e.response?.data?.errors || 'Unexpected error');
+        }
+    }
+);
+
 export const logout = createAsyncThunk(
     'auth/logout',
     async (_, { rejectWithValue }) => {
@@ -78,13 +90,20 @@ export const logout = createAsyncThunk(
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        setIsAuthChecking(state, actions: PayloadAction<boolean>) {
+            state.isAuthChecking = actions.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(logout.fulfilled, () => {
             localStorage.removeItem('token');
-            return initialState;
+            return {
+                ...initialState,
+                isAuthChecking: false
+            };
         });
-        builder.addMatcher(isAnyOf(registration.fulfilled, login.fulfilled), (state, action: PayloadAction<AuthResponse>) => {
+        builder.addMatcher(isAnyOf(registration.fulfilled, login.fulfilled, refreshAuth.fulfilled), (state, action: PayloadAction<AuthResponse>) => {
             const { user, accessToken } = action.payload;
 
             state.user = user;
@@ -100,7 +119,7 @@ export const authSlice = createSlice({
         builder.addMatcher(isAnyOf(registration.pending, login.pending, logout.pending), (state) => {
             state.isAuthLoading = true;
         });
-        builder.addMatcher(isAnyOf(registration.rejected, login.rejected, logout.rejected), (state) => {
+        builder.addMatcher(isAnyOf(registration.rejected, login.rejected, refreshAuth.rejected, logout.rejected), (state) => {
             state.isAuthLoading = false;
             state.authError = {
                 isError: true,
@@ -112,5 +131,5 @@ export const authSlice = createSlice({
 
 export default authSlice.reducer;
 export const {
-
+    setIsAuthChecking
 } = authSlice.actions;

@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { API } from "../lib";
 import { AuthResponse } from "../models/responses";
 
@@ -28,6 +28,15 @@ export const loginAPI = async (email: string, password: string): Promise<AxiosRe
         password: password
     });
 };
+
+export const refreshAuthAPI = async (): Promise<AxiosResponse<AuthResponse>> => {
+    return await axios.get<AuthResponse>(`${API_URL}/user/refresh`, {
+        withCredentials: true,
+        headers: {
+            'User-Language': localStorage.getItem('lang') || 'en'
+        }
+    });
+}
 
 export const logoutAPI = async (): Promise<AxiosResponse<number | null>> => {
     return await API.post<number | null>(`${API_URL}/user/logout`);
