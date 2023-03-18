@@ -24,6 +24,7 @@ model User {
   lang             Lang              @default(en)
   refreshToken     Token[]
   UserPasswordCode UserPasswordCode?
+  UserScores       UserScores?
 }
 
 model Token {
@@ -42,6 +43,24 @@ model UserPasswordCode {
   passwordCode String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now()) @updatedAt
+}
+
+model Game {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  description String
+  UserScores  UserScores?
+}
+
+model UserScores {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameId String @unique
+  game   Game   @relation(fields: [gameId], references: [id])
+  level  Int    @default(0)
+  score  BigInt @default(0)
+  region String
 }
 
 enum Role {
