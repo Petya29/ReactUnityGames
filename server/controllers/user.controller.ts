@@ -158,6 +158,19 @@ class UserController {
             next(e);
         }
     }
+
+    async edit(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { nickname, lang } = req.body;
+            const userId = req.user.id;
+
+            const userData = await UserService.editUser(userId, nickname, lang);
+
+            res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new UserController();

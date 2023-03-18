@@ -91,6 +91,18 @@ class UserService {
             }
         });
     }
+
+    async editUser(id: string, nickname: string, lang: Models.Lang) {
+        return await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                nickname: nickname,
+                lang: lang
+            }
+        });
+    }
 }
 
 export default new UserService();
