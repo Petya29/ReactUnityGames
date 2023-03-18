@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../models/entities";
+import { Lang, User } from "../../models/entities";
 import { AuthResponse } from "../../models/responses";
-import { loginAPI, logoutAPI, refreshAuthAPI, registrationAPI } from "../../services/AuthService";
+import { editUserAPI, loginAPI, logoutAPI, refreshAuthAPI, registrationAPI } from "../../services/AuthService";
 
 interface AuthState {
     user: User,
@@ -63,6 +63,18 @@ export const login = createAsyncThunk(
     }
 );
 
+export const editUser = createAsyncThunk(
+    'auth/editUser',
+    async ({ nickname, lang }: { nickname?: string, lang?: keyof typeof Lang }, { rejectWithValue }) => {
+        try {
+            const response = await editUserAPI(nickname, lang);
+            return response.data;
+        } catch (e: any) {
+            return rejectWithValue(e.response?.data?.errors || 'Unexpected error');
+        }
+    }
+);
+
 export const refreshAuth = createAsyncThunk(
     'auth/refreshAuth',
     async (_, { rejectWithValue }) => {
@@ -96,6 +108,9 @@ export const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(editUser.fulfilled, (state, action: PayloadAction<User>) => {
+            state.user = action.payload;
+        });
         builder.addCase(logout.fulfilled, () => {
             localStorage.removeItem('token');
             return {

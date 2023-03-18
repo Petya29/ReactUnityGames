@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { API } from "../lib";
+import { Lang, User } from "../models/entities";
 import { AuthResponse } from "../models/responses";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
@@ -28,6 +29,13 @@ export const loginAPI = async (email: string, password: string): Promise<AxiosRe
         password: password
     });
 };
+
+export const editUserAPI = async (nickname?: string, lang?: keyof typeof Lang): Promise<AxiosResponse<User>> => {
+    return await API.post<User>(`${API_URL}/user/edit`, {
+        nickname: nickname,
+        lang: lang
+    });
+}
 
 export const refreshAuthAPI = async (): Promise<AxiosResponse<AuthResponse>> => {
     return await axios.get<AuthResponse>(`${API_URL}/user/refresh`, {

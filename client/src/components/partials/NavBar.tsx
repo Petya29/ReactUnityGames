@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Lang } from "../../models/entities";
 import { useLocalStorage } from "../../hooks/use-local-storage";
 import { i18n } from "../../lib";
-import { logout } from "../../store/slices/authSlice";
+import { editUser, logout } from "../../store/slices/authSlice";
 import { setSnackbar } from "../../store/slices/utilsSlice";
 import { NavLink } from "react-router-dom";
 
@@ -25,7 +25,7 @@ export const NavBar = () => {
         const newLang = event.target.value as Lang;
         i18n.changeLanguage(newLang).then(() => {
             if (isAuth) {
-                // dispatch(editProfile({ ...user, lang: newLang })); TODO edit user
+                dispatch(editUser({ lang: newLang }));
             }
             setCurrentLanguage(newLang);
             setStorageLanguage(newLang);
