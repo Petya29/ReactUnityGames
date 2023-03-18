@@ -1,16 +1,13 @@
-import { useState } from "react";
-import { AppBar } from "../ui/surfaces";
+import { useEffect, useState } from "react";
+import { AppBar, Box, FormControl, MenuItem, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
 import { useTranslation } from 'react-i18next';
-import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { Select, SelectOption } from "../ui/inputs";
 import { Lang } from "../../models/entities";
 import { useLocalStorage } from "../../hooks/use-local-storage";
 import { i18n } from "../../lib";
 import { logout } from "../../store/slices/authSlice";
 import { setSnackbar } from "../../store/slices/utilsSlice";
-
-const languageSelectOption: SelectOption[] = Object.entries(Lang).map(([label, value]) => ({ label, value }));
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
 
@@ -22,21 +19,16 @@ export const NavBar = () => {
 
     const [storageLanguage, setStorageLanguage] = useLocalStorage<keyof typeof Lang>('lang', "en");
 
-    const [currentLanguage, setCurrentLanguage] = useState<SelectOption>(
-        isAuth
-            ? { label: user.lang, value: user.lang }
-            : { label: storageLanguage, value: storageLanguage }
-    );
+    const [currentLanguage, setCurrentLanguage] = useState<keyof typeof Lang>(isAuth ? user.lang : storageLanguage);
 
-    const handleChangeLanguage = (option: SelectOption | undefined) => {
-        if (!option) return;
-
-        i18n.changeLanguage(option.value).then(() => {
+    const handleChangeLanguage = (event: SelectChangeEvent) => {
+        const newLang = event.target.value as Lang;
+        i18n.changeLanguage(newLang).then(() => {
             if (isAuth) {
-                // TODO edit profile with new lang
+                // dispatch(editProfile({ ...user, lang: newLang })); TODO edit user
             }
-            setCurrentLanguage(option);
-            setStorageLanguage(option.value as Lang);
+            setCurrentLanguage(newLang);
+            setStorageLanguage(newLang);
         });
     }
 
@@ -54,49 +46,95 @@ export const NavBar = () => {
             });
     }
 
+    useEffect(() => {
+        if (isAuth) {
+            setCurrentLanguage(user.lang);
+        }
+    }, [isAuth]);
+
     return (
-        <AppBar position="sticky" className="!bg-[#1e1e1ebf]">
-            <div className='w-full font-bold flex justify-between items-center py-3 px-3'>
-                <div className='text-2xl text-[#d200fa]'>
-                    <Link to='/'>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="sticky" sx={{ zIndex: 1100 }}>
+                <Toolbar sx={{ justifyContent: "space-between" }}>
+                    <Typography
+                        component={NavLink}
+                        to='/'
+                        variant="h4"
+                        sx={{
+                            display: 'flex',
+                            mr: 2,
+                            cursor: 'pointer'
+                        }}
+                    >
                         SiteName
-                    </Link>
-                </div>
-                <div className="text-xl w-1/4 flex justify-between items-end h-8">
-                    <Link to='/'>
-                        {t('Home')}
-                    </Link>
-                    <Link to='/'>
-                        {t('Games')}
-                    </Link>
-                    <Link to='/'>
-                        {t('News')}
-                    </Link>
-                </div>
-                <div className="text-xl flex justify-between items-end h-8 gap-5">
-                    <Select
-                        className="!bg-transparent w-16"
-                        variant="lined"
-                        iconSize="sm"
-                        value={currentLanguage}
-                        options={languageSelectOption}
-                        onChange={(option) => handleChangeLanguage(option as SelectOption | undefined)}
-                    />
-                    {isAuth
-                        ?
-                        <span className="cursor-pointer" onClick={handleClickLogout}>{t('Logout')}</span>
-                        :
-                        <div className="flex gap-5">
-                            <Link to={'/login'}>
-                                {t('Log in')}
-                            </Link>
-                            <Link to={'/registration'}>
-                                {t('Sign up')}
-                            </Link>
-                        </div>
-                    }
-                </div>
-            </div>
-        </AppBar>
+                    </Typography>
+                    <Stack direction='row' sx={{ display: { xs: 'none', md: 'flex' }, gap: '60px' }}>
+                        <Typography
+                            component={NavLink}
+                            to='/'
+                            variant="h6"
+                            sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
+                        >
+                            {t('Home')}
+                        </Typography>
+                        <Typography
+                            component={NavLink}
+                            to='/games'
+                            variant="h6"
+                            sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
+                        >
+                            {t('Games')}
+                        </Typography>
+                        <Typography
+                            component={NavLink}
+                            to='/news'
+                            variant="h6"
+                            sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
+                        >
+                            {t('News')}
+                        </Typography>
+                    </Stack>
+                    <Stack direction='row'>
+                        <FormControl sx={{ display: { xs: 'none', md: 'inline-flex' }, mr: '10px' }}>
+                            <Select
+                                value={currentLanguage}
+                                onChange={handleChangeLanguage}
+                                variant='standard'
+                                inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem value={'en'}>{t('English')}</MenuItem>
+                                <MenuItem value={'pl'}>{t('Polish')}</MenuItem>
+                                <MenuItem value={'ua'}>{t('Ukrainian')}</MenuItem>
+                            </Select>
+                        </FormControl>
+                        {isAuth
+                            ?
+                            <Box
+                                color="inherit"
+                                sx={{ cursor: 'pointer' }}
+                                onClick={handleClickLogout}
+                            >
+                                <Typography variant="h6">
+                                    {t('Logout')}
+                                </Typography>
+                            </Box>
+                            :
+                            <Box sx={{ display: 'flex', gap: '10px' }}>
+                                <NavLink to='/login'>
+                                    <Typography variant="h6">
+                                        {t('Log in')}
+                                    </Typography>
+                                </NavLink>
+                                <NavLink to='/registration'>
+                                    <Typography variant="h6">
+                                        {t('Sign up')}
+                                    </Typography>
+                                </NavLink>
+                            </Box>
+                        }
+                    </Stack>
+                </Toolbar>
+            </AppBar>
+        </Box >
     )
 }

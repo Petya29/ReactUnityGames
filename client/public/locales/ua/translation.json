@@ -9,5 +9,11 @@
     "Forgot password?": "Забули пароль?",
     "Don't have an account? Sign Up": "Немає облікового запису? Зареєструйся",
     "Logout": "Вийти",
-    "Unexpected error": "Неочікувана помилка"
+    "Unexpected error": "Неочікувана помилка",
+    "Nickname must be at least 4 and no more than 32 characters": "Нік має бути не менше 4 і не більше 32 символів",
+    "password confirmation": "підтвердження паролю",
+    "English": "Англійська",
+    "Polish": "Польська",
+    "Ukrainian": "Українська",
+    "nickname": "нік"
 }

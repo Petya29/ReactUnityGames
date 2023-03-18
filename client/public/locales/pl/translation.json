@@ -9,5 +9,11 @@
     "Forgot password?": "Zapomniałeś hasła?",
     "Don't have an account? Sign Up": "Nie masz konta? Zapisać się",
     "Logout": "Wyloguj",
-    "Unexpected error": "Niespodziewany błąd"
+    "Unexpected error": "Niespodziewany błąd",
+    "Nickname must be at least 4 and no more than 32 characters": "Pseudonim musi mieć co najmniej 4 i nie więcej niż 32 znaki",
+    "password confirmation": "potwierdzenie hasła",
+    "English": "Angielski",
+    "Polish": "Polski",
+    "Ukrainian": "Ukraiński",
+    "nickname": "pseudonim"
 }

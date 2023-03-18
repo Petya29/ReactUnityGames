@@ -11,5 +11,9 @@
     "Logout": "Logout",
     "Unexpected error": "Unexpected error",
     "Nickname must be at least 4 and no more than 32 characters": "Nickname must be at least 4 and no more than 32 characters",
-    "password confirmation": "password confirmation"
+    "password confirmation": "password confirmation",
+    "English": "English",
+    "Polish": "Polish",
+    "Ukrainian": "Ukrainian",
+    "nickname": "nickname"
 }
