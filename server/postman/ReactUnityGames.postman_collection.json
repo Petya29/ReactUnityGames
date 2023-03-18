@@ -146,6 +146,103 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/api/user/logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/user/refresh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/refresh",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/user/edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwYmUxMjg4LTVmNjMtNGVlMC05OGU4LTFmY2M3YmZhOWI3MSIsIm5pY2tuYW1lIjoiUGV0cm8gQXZyYW1lbmtvIiwiZW1haWwiOiJwZXR5YTI5YXZyYW1lbmtvQGdtYWlsLmNvbSIsImlzQWN0aXZhdGVkIjpmYWxzZSwicm9sZSI6IlVTRVIiLCJyZWdpb24iOiJFdXJvcGUiLCJsYW5nIjoiZW4iLCJpYXQiOjE2NzkxNDIyMzYsImV4cCI6MTY3OTE1NjYzNn0.g-4MYXuv_5Y1Ck-Ber5zA1u09VecxMz7B1Z0iJVnGcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nickname",
+									"value": "Petya",
+									"type": "text"
+								},
+								{
+									"key": "lang",
+									"value": "ua",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user/edit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"edit"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
