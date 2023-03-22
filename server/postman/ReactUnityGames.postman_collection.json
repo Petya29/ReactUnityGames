@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8a9d85b6-d503-4927-b23d-eb42e8c4997c",
+		"_postman_id": "9d30896b-889e-4af4-8603-2b977e0fa578",
 		"name": "ReactUnityGames",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13230528"
+		"_exporter_id": "24858593"
 	},
 	"item": [
 		{
@@ -239,6 +239,56 @@
 								"api",
 								"user",
 								"edit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "game",
+			"item": [
+				{
+					"name": "/api/game/:gameId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "level",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "score",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "region",
+									"value": "ua",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/game/someGme/65e54410-d36f-4cc8-be6a-f518128a5b74",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"game",
+								"someGme",
+								"65e54410-d36f-4cc8-be6a-f518128a5b74"
 							]
 						}
 					},
