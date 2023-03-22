@@ -59,7 +59,7 @@ model UserScores {
   gameId String @unique
   game   Game   @relation(fields: [gameId], references: [id])
   level  Int    @default(0)
-  score  BigInt @default(0)
+  score  Int    @default(0)
   region String
 }
 
