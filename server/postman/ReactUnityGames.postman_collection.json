@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9d30896b-889e-4af4-8603-2b977e0fa578",
+		"_postman_id": "aae310cc-cbcd-4b60-b8f2-32715534db75",
 		"name": "ReactUnityGames",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24858593"
+		"_exporter_id": "13230528"
 	},
 	"item": [
 		{
@@ -252,6 +252,16 @@
 				{
 					"name": "/api/game/:gameId",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwYmUxMjg4LTVmNjMtNGVlMC05OGU4LTFmY2M3YmZhOWI3MSIsIm5pY2tuYW1lIjoiUGV0eWEiLCJlbWFpbCI6InBldHlhMjlhdnJhbWVua29AZ21haWwuY29tIiwiaXNBY3RpdmF0ZWQiOmZhbHNlLCJyb2xlIjoiVVNFUiIsInJlZ2lvbiI6IkV1cm9wZSIsImxhbmciOiJlbiIsImlhdCI6MTY3OTU4MDM3NiwiZXhwIjoxNjc5NTk0Nzc2fQ.CTH9otWrPykzq9eU2AUAtRUUV9vPOPyyluay5YA0F_w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -275,7 +285,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/api/game/someGme/65e54410-d36f-4cc8-be6a-f518128a5b74",
+							"raw": "http://127.0.0.1:5000/api/game/save-score/:gameId",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -287,8 +297,14 @@
 							"path": [
 								"api",
 								"game",
-								"someGme",
-								"65e54410-d36f-4cc8-be6a-f518128a5b74"
+								"save-score",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId",
+									"value": "dc5d1dcf-4bb7-467b-bc20-f33c8af82adc"
+								}
 							]
 						}
 					},
