@@ -9,13 +9,13 @@ class GameService {
         score: number,
         region: string
         ) {
-            const gameExists = await prisma.game.findUnique({
+            const isGameExists = await prisma.game.findUnique({
                 where: {
                     id: gameId
                 }
             });
 
-            if(!gameExists) {
+            if(!isGameExists) {
                 throw ApiError.badRequest('Game with this id does not exist', {
                     msg: 'Game with this id does not exist',
                     param: 'gameId'
@@ -26,14 +26,13 @@ class GameService {
                 data: {
                     userId: userId,
                     gameId: gameId,
-                    level: level,
-                    score: score,
+                    level: Number(level),
+                    score: Number(score),
                     region: region
                 }
             });
 
             return newScore;
-
     }
 }
 

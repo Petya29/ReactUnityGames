@@ -50,6 +50,8 @@ model Game {
   name        String      @unique
   description String
   UserScores  UserScores?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
 }
 
 model UserScores {
@@ -61,6 +63,8 @@ model UserScores {
   level  Int    @default(0)
   score  Int    @default(0)
   region String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
 }
 
 enum Role {

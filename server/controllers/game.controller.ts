@@ -5,17 +5,16 @@ class GameController {
     async saveScore (req: Request, res: Response, next: NextFunction){
         try {
             const {
-                userId,
                 level,
                 score,
                 region
             } : {
-                userId: string,
                 level: number,
                 score: number,
                 region: string
             } = req.body;
 
+            const userId = req.user.id;
             const gameId = req.params.gameId;
 
             const newScore = await GameService.saveScore(userId, gameId, level, score, region);
