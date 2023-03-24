@@ -15,6 +15,8 @@ class GameService {
                 param: 'gameId'
             });
         }
+
+        return isGameExists;
     }
 
     async saveScore(
