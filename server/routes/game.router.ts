@@ -5,5 +5,6 @@ import authMiddleware from "../middleware/auth.middleware";
 const gameRouter = Router();
 
 gameRouter.post('/save-score/:gameId', authMiddleware, GameController.saveScore);
+gameRouter.get('/get-score/:gameId', authMiddleware, GameController.getScore)
 
 export default gameRouter;

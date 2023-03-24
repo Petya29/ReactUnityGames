@@ -19,10 +19,24 @@ class GameController {
 
             const newScore = await GameService.saveScore(userId, gameId, level, score, region);
 
-            return res.json(newScore)
+            return res.json(newScore);
         } catch (e) {
             next(e);
         }
+    }
+
+    async getScore(req: Request, res: Response, next: NextFunction){
+        try {
+            const userId = req.user.id;
+            const gameId = req.params.gameId
+
+            const score = await GameService.getScore(userId, gameId);
+    
+            return res.json(score);     
+        } catch (e) {
+            next(e);
+        }
+
     }
 }
 
