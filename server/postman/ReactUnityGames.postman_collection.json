@@ -350,6 +350,43 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/api/game/get-many-scores/:gameId?region=",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/game/get-many-scores/:gameId?region=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"game",
+								"get-many-scores",
+								":gameId"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "gameId",
+									"value": "bfa97fb7-9a0a-4216-87a0-57013b2e8965"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
