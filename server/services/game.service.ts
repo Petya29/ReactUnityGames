@@ -85,6 +85,10 @@ class GameService {
 
         return scores;
     }
+
+    async getGames() {
+        return await prisma.game.findMany();
+    }
 }
 
 export default new GameService();

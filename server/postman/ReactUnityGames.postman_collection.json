@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aae310cc-cbcd-4b60-b8f2-32715534db75",
+		"_postman_id": "f811126a-71a0-4831-a81c-849df641a910",
 		"name": "ReactUnityGames",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13230528"
@@ -357,7 +357,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/api/game/get-many-scores/:gameId?region=",
+							"raw": "http://127.0.0.1:5000/api/game/get-many-scores/:gameId?region=ua",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -375,14 +375,38 @@
 							"query": [
 								{
 									"key": "region",
-									"value": ""
+									"value": "ua"
 								}
 							],
 							"variable": [
 								{
 									"key": "gameId",
-									"value": "bfa97fb7-9a0a-4216-87a0-57013b2e8965"
+									"value": "dc5d1dcf-4bb7-467b-bc20-f33c8af82adc"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/game/games",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"game",
+								"games"
 							]
 						}
 					},
