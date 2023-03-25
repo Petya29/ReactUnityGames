@@ -25,8 +25,13 @@ const editSchema = [
     body('lang').optional().isIn(['en', 'pl', 'ua']).withMessage('Incorrect language')
 ]
 
+const saveScoreSchema = [
+    body('region').exists({ checkFalsy: true }).withMessage('Region is required field'),
+]
+
 export {
     registrationSchema,
     loginSchema,
-    editSchema
+    editSchema,
+    saveScoreSchema
 }

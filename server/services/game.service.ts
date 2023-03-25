@@ -41,7 +41,7 @@ class GameService {
                 create: {
                     userId: userId,
                     gameId: gameId,
-                    level: Number(level),
+                    level: Number(level) < 0 ? 0 : Number(level),
                     score: Number(score),
                     region: region
                 }

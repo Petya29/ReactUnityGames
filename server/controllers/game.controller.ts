@@ -5,8 +5,8 @@ class GameController {
     async saveScore (req: Request, res: Response, next: NextFunction){
         try {
             const {
-                level,
-                score,
+                level = 0,
+                score = 0,
                 region
             } : {
                 level: number,
