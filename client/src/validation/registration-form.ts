@@ -6,6 +6,7 @@ import { FormikHelpers } from "formik";
 import { registration } from "../store/slices/authSlice";
 import i18next from "i18next";
 import { setSnackbar } from "../store/slices/utilsSlice";
+import { i18n } from "../lib";
 
 interface RegistrationFormFields {
     nickname: string,
@@ -65,6 +66,9 @@ export function useRegistrationForm() {
         }))
             .unwrap()
             .then(originalPromiseResult => {
+                i18n.changeLanguage(originalPromiseResult.user.lang);
+                localStorage.setItem('lang', originalPromiseResult.user.lang);
+                localStorage.setItem('region', originalPromiseResult.user.region);
                 navigate('/');
             })
             .catch((error) => {

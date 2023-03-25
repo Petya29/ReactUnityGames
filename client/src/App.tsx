@@ -14,6 +14,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   const [storageLanguage, setStorageLanguage] = useLocalStorage<keyof typeof Lang>("lang", "en");
+  const [storageRegion, setStorageRegion] = useLocalStorage<string>("region", "Europe");
 
   const { isAuthChecking } = useAppSelector(state => state.auth);
 
@@ -23,6 +24,7 @@ function App() {
       .then((originalPromiseResult) => {
         i18n.changeLanguage(originalPromiseResult.user.lang)
           .then(() => setStorageLanguage(originalPromiseResult.user.lang));
+        setStorageRegion(originalPromiseResult.user.region);
       })
       .catch((error) => {
         i18n.changeLanguage(storageLanguage);

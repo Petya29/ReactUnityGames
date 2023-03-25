@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + React + TS</title>
+  <title>Site Name</title>
 </head>
 
 <body>
@@ -19,9 +19,25 @@
   <script>
     async function SetScore(score) {
       const currUrl = window.location.href.split('/');
-      const gameId = currUrl[currUrl.length - 1];
 
-      // const response  = await fetch("<%= api_url %>/game/save-score/:gameId");
+      const gameId = currUrl[currUrl.length - 1];
+      const token = localStorage.getItem('token');
+      const region = localStorage.getItem('region');
+
+      if (token) {
+        const response = await fetch(`<%= api_url %>/game/save-score/${gameId}`, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: `{
+          "score": ${score},
+          "region": ${region || "Europe"}
+        }`
+        });
+      }
     }
   </script>
 </body>

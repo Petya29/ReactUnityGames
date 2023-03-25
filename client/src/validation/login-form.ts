@@ -44,6 +44,7 @@ export function useLoginForm() {
             .then((originalPromiseResult) => {
                 i18n.changeLanguage(originalPromiseResult.user.lang);
                 localStorage.setItem('lang', originalPromiseResult.user.lang);
+                localStorage.setItem('region', originalPromiseResult.user.region);
                 navigate('/news');
             })
             .catch((error) => {
