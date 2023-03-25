@@ -309,6 +309,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/api/game/get-score/:gameId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwYmUxMjg4LTVmNjMtNGVlMC05OGU4LTFmY2M3YmZhOWI3MSIsIm5pY2tuYW1lIjoiUGV0eWEiLCJlbWFpbCI6InBldHlhMjlhdnJhbWVua29AZ21haWwuY29tIiwiaXNBY3RpdmF0ZWQiOmZhbHNlLCJyb2xlIjoiVVNFUiIsInJlZ2lvbiI6IkV1cm9wZSIsImxhbmciOiJlbiIsImlhdCI6MTY3OTU4MDM3NiwiZXhwIjoxNjc5NTk0Nzc2fQ.CTH9otWrPykzq9eU2AUAtRUUV9vPOPyyluay5YA0F_w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/game/get-score/:gameId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"game",
+								"get-score",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId",
+									"value": "dc5d1dcf-4bb7-467b-bc20-f33c8af82adc"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
