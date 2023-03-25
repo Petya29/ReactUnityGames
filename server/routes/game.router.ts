@@ -8,5 +8,6 @@ const gameRouter = Router();
 
 gameRouter.post('/save-score/:gameId', authMiddleware, validate(saveScoreSchema), GameController.saveScore);
 gameRouter.get('/get-score/:gameId', authMiddleware, GameController.getScore)
+gameRouter.get('/get-many-scores/:gameId', GameController.getManyScores)
 
 export default gameRouter;

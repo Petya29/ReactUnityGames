@@ -69,6 +69,22 @@ class GameService {
 
         return score;
     }
+
+    async getManyScores(gameId: string, region: string){
+        await this.isGameExists(gameId);
+
+        const scores = await prisma.userScores.findMany({
+            where: {
+                gameId: gameId,
+                region: region
+            },
+            take: 15
+        });
+
+        if(scores.length === 0) return {"msg" : "No scores found for this region"};
+
+        return scores;
+    }
 }
 
 export default new GameService();

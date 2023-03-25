@@ -37,7 +37,21 @@ class GameController {
         } catch (e) {
             next(e);
         }
+    }
 
+    async getManyScores(req: Request, res: Response, next: NextFunction){
+        try {
+            const gameId = req.params.gameId;
+            let region;
+
+            req.query.region ? region = String(req.query.region) : region = 'Europe';
+
+            const scores = await GameService.getManyScores(gameId, region);
+
+            return res.json(scores);
+        } catch (e) {
+           next(e); 
+        }
     }
 }
 
