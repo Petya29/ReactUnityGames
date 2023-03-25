@@ -1,11 +1,12 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
+import { Game } from "../../models/entities"
 
 type GameCardProps = {
-    gameId: string
+    game: Game
 }
 
-export const GameCard = ({ gameId }: GameCardProps) => {
+export const GameCard = ({ game }: GameCardProps) => {
     return (
         <Card>
             <CardHeader title={'Doodle Jump'} subheader="click to play" />
@@ -13,18 +14,18 @@ export const GameCard = ({ gameId }: GameCardProps) => {
                 component="img"
                 height="240px"
                 width="320px"
-                image={`../../../public/games/${gameId}/preview.jpg`}
+                image={`../../../public/games/${game.id}/preview.jpg`}
                 alt="preview"
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    Description
+                    {game.description}
                 </Typography>
             </CardContent>
             <CardActions>
                 <Button
                     component={Link}
-                    to={"/games/" + gameId}
+                    to={"/games/" + game.id}
                     variant="contained"
                 >
                     Go game

@@ -28,6 +28,14 @@ export interface UserPasswordCode {
     updatedAt: Date;
 }
 
+export interface Game {
+    id: string;
+    name: string;
+    description: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface Snackbar {
     text: string,
     severity: 'error' | 'info' | 'success' | 'warning',
