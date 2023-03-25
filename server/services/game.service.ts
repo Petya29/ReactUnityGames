@@ -9,7 +9,7 @@ class GameService {
             }
         });
 
-        if(!isGameExists) {
+        if (!isGameExists) {
             throw ApiError.badRequest('Game with this id does not exist', {
                 msg: 'Game with this id does not exist',
                 param: 'gameId'
@@ -25,37 +25,45 @@ class GameService {
         level: number,
         score: number,
         region: string
-        ) {
-            await this.isGameExists(gameId);
+    ) {
+        await this.isGameExists(gameId);
 
-            const newScore = await prisma.userScores.upsert({
-                where: {
-                    userId: userId
-                },
-                update: {
-                    level: Number(level),
-                    score: {
-                        increment: Number(score)
-                    }
-                },
-                create: {
+        const newScore = await prisma.userScores.upsert({
+            where: {
+                userId_gameId_region: {
                     userId: userId,
                     gameId: gameId,
-                    level: Number(level) < 0 ? 0 : Number(level),
-                    score: Number(score),
                     region: region
                 }
-            })
+            },
+            update: {
+                level: Number(level),
+                score: {
+                    increment: Number(score)
+                }
+            },
+            create: {
+                userId: userId,
+                gameId: gameId,
+                level: Number(level),
+                score: Number(score),
+                region: region
+            }
+        });
 
-            return newScore;
+        return newScore;
     }
 
-    async getScore(userId: string, gameId: string){
+    async getScore(userId: string, region: string, gameId: string) {
         await this.isGameExists(gameId);
 
         const score = await prisma.userScores.findUnique({
             where: {
-                userId: userId
+                userId_gameId_region: {
+                    userId: userId,
+                    gameId: gameId,
+                    region: region
+                }
             }
         })
 

@@ -28,9 +28,10 @@ class GameController {
     async getScore(req: Request, res: Response, next: NextFunction){
         try {
             const userId = req.user.id;
+            const region = req.user.region;
             const gameId = req.params.gameId
 
-            const score = await GameService.getScore(userId, gameId);
+            const score = await GameService.getScore(userId, region, gameId);
     
             return res.json(score);     
         } catch (e) {
