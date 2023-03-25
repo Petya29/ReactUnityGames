@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Login } from "../pages/auth/Login";
 import { Registration } from "../pages/auth/Registration";
 import { Game } from "../pages/games/Game";
+import { GamesList } from "../pages/games/GamesList";
 import { Home } from "../pages/Home";
 import { Profile } from "../pages/user/Profile";
 
@@ -41,6 +42,12 @@ export const routes: Route[] = [
         id: 5,
         protected: false,
         path: '/games',
+        element: GamesList
+    },
+    {
+        id: 6,
+        protected: false,
+        path: 'games/:gameId',
         element: Game
     }
 ];
