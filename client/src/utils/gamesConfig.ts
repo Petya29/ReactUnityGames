@@ -1,3 +1,6 @@
 export const gamesIds = [
-    'dc5d1dcf-4bb7-467b-bc20-f33c8af82adc'
+    'dc5d1dcf-4bb7-467b-bc20-f33c8af82adc',
+    '123',
+    '321',
+    '231'
 ]
