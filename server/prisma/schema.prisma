@@ -11,20 +11,21 @@ datasource db {
 }
 
 model User {
-  id               String            @id @default(uuid())
+  id               String             @id @default(uuid())
   nickname         String
-  email            String            @unique
+  email            String             @unique
   password         String
-  role             Role              @default(USER)
-  isActivated      Boolean           @default(false)
+  role             Role               @default(USER)
+  isActivated      Boolean            @default(false)
   activationLink   String?
   region           String
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @default(now()) @updatedAt
-  lang             Lang              @default(en)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now()) @updatedAt
+  lang             Lang               @default(en)
   refreshToken     Token[]
   UserPasswordCode UserPasswordCode?
   UserScores       UserScores[]
+  UserAchievements UserAchievements[]
 }
 
 model Token {
@@ -46,12 +47,13 @@ model UserPasswordCode {
 }
 
 model Game {
-  id          String       @id @default(uuid())
-  name        String       @unique
-  description String
-  UserScores  UserScores[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @default(now()) @updatedAt
+  id           String        @id @default(uuid())
+  name         String        @unique
+  description  String
+  UserScores   UserScores[]
+  achievements Achievement[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
 }
 
 model UserScores {
@@ -59,7 +61,7 @@ model UserScores {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   gameId    String
-  game      Game     @relation(fields: [gameId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   level     Int      @default(0)
   score     Int      @default(0)
   region    String
@@ -67,6 +69,27 @@ model UserScores {
   updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([userId, gameId, region])
+}
+
+model UserAchievements {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+model Achievement {
+  id               String             @id @default(uuid())
+  gameId           String
+  game             Game               @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  name             String
+  description      String
+  UserAchievements UserAchievements[]
+
+  @@unique([gameId, name])
 }
 
 enum Role {
