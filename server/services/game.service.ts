@@ -81,8 +81,6 @@ class GameService {
             take: 15
         });
 
-        if(scores.length === 0) return {"msg" : "No scores found for this region"};
-
         return scores;
     }
 

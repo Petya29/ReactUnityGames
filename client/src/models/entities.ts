@@ -36,6 +36,17 @@ export interface Game {
     updatedAt: Date;
 }
 
+export interface UserScore {
+    id: string;
+    userId: string;
+    gameId: string;
+    level: number;
+    score: number;
+    region: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface Snackbar {
     text: string,
     severity: 'error' | 'info' | 'success' | 'warning',

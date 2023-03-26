@@ -2,10 +2,17 @@ import { useEffect } from "react";
 import { Box } from "@mui/material";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { getScores, getUserScore, saveScore } from "../../store/slices/gameSlice";
 
 export const Game = () => {
 
     const params = useParams();
+
+    const dispatch = useAppDispatch();
+
+    const { user, isAuth } = useAppSelector(state => state.auth);
+    const { scores, userScores } = useAppSelector(state => state.game);
 
     const { unityProvider, UNSAFE__detachAndUnloadImmediate } = useUnityContext({
         loaderUrl: `../../../public/games/${params.gameId}/Dip.loader.js`,
@@ -14,8 +21,15 @@ export const Game = () => {
         codeUrl: `../../../public/games/${params.gameId}/Dip.wasm`,
     });
 
-    const test = (e: any) => {
-        console.log(e.detail);
+    const saveScoreEventHandler = (e: any) => {
+        if (params.gameId !== undefined) {
+            dispatch(saveScore({
+                gameId: params.gameId,
+                score: e.detail,
+                level: 0,
+                region: user.region
+            }));
+        }
     }
 
     useEffect(() => {
@@ -25,9 +39,25 @@ export const Game = () => {
     }, [UNSAFE__detachAndUnloadImmediate]);
 
     useEffect(() => {
-        window.addEventListener('setScore', test);
+        window.addEventListener('setScore', saveScoreEventHandler);
+
+        const isScoresExist = scores.find(score => score.gameId === params.gameId);
+        if (isScoresExist === undefined && params.gameId !== undefined) {
+            dispatch(getScores({
+                gameId: params.gameId,
+                region: user.region
+            }));
+        }
+
+        if (isAuth) {
+            const userScoreIndex = userScores.findIndex(userScore => userScore.gameId === params.gameId);
+            if (userScoreIndex === -1 && params.gameId !== undefined) {
+                dispatch(getUserScore({ gameId: params.gameId }));
+            }
+        }
+
         return () => {
-            window.removeEventListener('setScore', test);
+            window.removeEventListener('setScore', saveScoreEventHandler);
         }
     }, []);
 
