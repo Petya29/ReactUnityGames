@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { ActionButton } from "../components/ui/inputs";
 
 export const Home = () => {
 
+    const navigate = useNavigate();
+
     const handleclick = () => {
-        console.log('click')
+        navigate('/games');
     }
 
     return (

@@ -76,7 +76,7 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState: initialState,
     reducers: {
-
+        resetGameSlice: () => initialState
     },
     extraReducers: (builder) => {
         builder.addCase(getGames.fulfilled, (state, action: PayloadAction<Game[]>) => {
@@ -118,5 +118,5 @@ export const gameSlice = createSlice({
 
 export default gameSlice.reducer;
 export const {
-
+    resetGameSlice
 } = gameSlice.actions;

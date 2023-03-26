@@ -7,11 +7,14 @@ import { useLocalStorage } from "../../hooks/use-local-storage";
 import { i18n } from "../../lib";
 import { editUser, logout } from "../../store/slices/authSlice";
 import { setSnackbar } from "../../store/slices/utilsSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { resetGameSlice } from "../../store/slices/gameSlice";
 
 export const NavBar = () => {
 
     const { t } = useTranslation();
+
+    const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
 
@@ -35,6 +38,12 @@ export const NavBar = () => {
     const handleClickLogout = () => {
         dispatch(logout())
             .unwrap()
+            .then((originalPromiseResult) => {
+                if (originalPromiseResult) {
+                    dispatch(resetGameSlice());
+                    navigate('/');
+                }
+            })
             .catch((originalPromiseResult) => {
                 if (originalPromiseResult === 'Unexpected error') {
                     dispatch(setSnackbar({
