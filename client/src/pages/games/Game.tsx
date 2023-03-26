@@ -14,11 +14,22 @@ export const Game = () => {
         codeUrl: `../../../public/games/${params.gameId}/Dip.wasm`,
     });
 
+    const test = (e: any) => {
+        console.log(e.detail);
+    }
+
     useEffect(() => {
         return () => {
             UNSAFE__detachAndUnloadImmediate();
         }
     }, [UNSAFE__detachAndUnloadImmediate]);
+
+    useEffect(() => {
+        window.addEventListener('setScore', test);
+        return () => {
+            window.removeEventListener('setScore', test);
+        }
+    }, []);
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -18,26 +18,8 @@
   <script type="module" src="/src/main.tsx"></script>
   <script>
     async function SetScore(score) {
-      const currUrl = window.location.href.split('/');
-
-      const gameId = currUrl[currUrl.length - 1];
-      const token = localStorage.getItem('token');
-      const region = localStorage.getItem('region');
-
-      if (token) {
-        const response = await fetch(`<%= api_url %>/game/save-score/${gameId}`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          },
-          body: `{
-          "score": ${score},
-          "region": ${region || "Europe"}
-        }`
-        });
-      }
+      const event = new CustomEvent("setScore", { detail: score });
+      dispatchEvent(event);
     }
   </script>
 </body>
