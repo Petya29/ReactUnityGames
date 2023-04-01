@@ -78,6 +78,14 @@ class GameService {
                 gameId: gameId,
                 region: region
             },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        nickname: true
+                    }
+                }
+            },
             take: 15
         });
 

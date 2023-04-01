@@ -1,9 +1,12 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ActionButton } from "../components/ui/inputs";
 
 export const Home = () => {
 
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
 
     const handleclick = () => {
         navigate('/games');
@@ -19,7 +22,7 @@ export const Home = () => {
             </div>
             <div>
                 <ActionButton onClick={handleclick}>
-                    Go game
+                    {t("Games")}
                 </ActionButton>
             </div>
         </div>

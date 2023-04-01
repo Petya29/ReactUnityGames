@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material"
+import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { Game } from "../../models/entities"
 
@@ -7,9 +8,12 @@ type GameCardProps = {
 }
 
 export const GameCard = ({ game }: GameCardProps) => {
+
+    const { t } = useTranslation();
+
     return (
         <Card>
-            <CardHeader title={game.name} subheader="click to play" />
+            <CardHeader title={game.name} subheader={t("try to play")} />
             <CardMedia
                 sx={{
                     height: "240px",
@@ -24,13 +28,13 @@ export const GameCard = ({ game }: GameCardProps) => {
                     {game.description}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions sx={{ justifyContent: "flex-end" }}>
                 <Button
                     component={Link}
                     to={"/games/" + game.id}
                     variant="contained"
                 >
-                    Go game
+                    {t("Go game")}
                 </Button>
             </CardActions>
         </Card>

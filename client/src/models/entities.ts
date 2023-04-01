@@ -39,6 +39,7 @@ export interface Game {
 export interface UserScore {
     id: string;
     userId: string;
+    user?: User;
     gameId: string;
     level: number;
     score: number;

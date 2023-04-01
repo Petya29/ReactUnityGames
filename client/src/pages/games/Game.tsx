@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getScores, getUserScore, saveScore } from "../../store/slices/gameSlice";
+import { Leaderboard } from "../../components/partials/Leaderboard";
 
 export const Game = () => {
 
@@ -14,7 +15,7 @@ export const Game = () => {
     const { user, isAuth } = useAppSelector(state => state.auth);
     const { scores, userScores } = useAppSelector(state => state.game);
 
-    const { unityProvider, UNSAFE__detachAndUnloadImmediate } = useUnityContext({
+    const { unityProvider, UNSAFE__detachAndUnloadImmediate, isLoaded } = useUnityContext({
         loaderUrl: `../../../public/games/${params.gameId}/Dip.loader.js`,
         dataUrl: `../../../public/games/${params.gameId}/Dip.data`,
         frameworkUrl: `../../../public/games/${params.gameId}/Dip.framework.js`,
@@ -62,8 +63,39 @@ export const Game = () => {
     }, []);
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Unity unityProvider={unityProvider} style={{ width: 800, height: 600 }} />
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                height: isLoaded ? 'inherit' : '45vh',
+                alignItems: 'flex-end'
+            }}
+        >
+            {!isLoaded &&
+                <Box>
+                    <CircularProgress sx={{ color: '#d200fa' }} />
+                </Box>
+            }
+            <Box
+                sx={{
+                    display: isLoaded ? 'flex' : 'none',
+                    marginTop: '30px',
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                    gap: "40px"
+                }}
+            >
+                <Unity
+                    unityProvider={unityProvider}
+                    style={{
+                        width: 800,
+                        height: 600
+                    }}
+                />
+                {params.gameId &&
+                    <Leaderboard gameId={params.gameId} />
+                }
+            </Box>
         </Box>
     )
 }

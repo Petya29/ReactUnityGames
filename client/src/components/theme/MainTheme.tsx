@@ -82,7 +82,7 @@ export const MainTheme = ({ children }: MainThemeProps) => {
             <Fragment>
                 <CssBaseline />
                 <NavBar />
-                <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
+                <Box component="main" sx={{ flexGrow: 1, p: 0, mb: '40px' }}>
                     <Snackbar
                         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={snackbar.open}
