@@ -9,11 +9,13 @@ type GameCardProps = {
 export const GameCard = ({ game }: GameCardProps) => {
     return (
         <Card>
-            <CardHeader title={'Doodle Jump'} subheader="click to play" />
+            <CardHeader title={game.name} subheader="click to play" />
             <CardMedia
+                sx={{
+                    height: "240px",
+                    width: "320px"
+                }}
                 component="img"
-                height="240px"
-                width="320px"
                 image={`../../../public/games/${game.id}/preview.jpg`}
                 alt="preview"
             />
