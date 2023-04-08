@@ -36,6 +36,14 @@ class GameService {
                     region: region
                 }
             },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        nickname: true
+                    }
+                }
+            },
             update: {
                 level: Number(level),
                 score: {
@@ -64,7 +72,15 @@ class GameService {
                     gameId: gameId,
                     region: region
                 }
-            }
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        nickname: true
+                    }
+                }
+            },
         })
 
         return score;
