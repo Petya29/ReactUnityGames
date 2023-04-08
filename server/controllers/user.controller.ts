@@ -96,7 +96,7 @@ class UserController {
             const activationLink = req.params.link;
             await UserService.activate(activationLink);
 
-            return res.redirect(process.env.CLIENT_URL as string);
+            return res.redirect(process.env.CLIENT_URL?.split('|')[1] as string);
         } catch (e) {
             next(e);
         }

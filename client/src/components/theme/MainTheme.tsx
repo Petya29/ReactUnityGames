@@ -1,5 +1,5 @@
-import { Fragment, ReactNode, useMemo } from "react";
-import { Alert, Box, createTheme, CssBaseline, Slide, SlideProps, Snackbar, ThemeProvider } from "@mui/material";
+import { Fragment, ReactNode, useMemo, useState } from "react";
+import { Alert, Box, Collapse, createTheme, CssBaseline, Slide, SlideProps, Snackbar, ThemeProvider } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Mode } from "../../models/entities";
@@ -31,6 +31,9 @@ export const MainTheme = ({ children }: MainThemeProps) => {
     const dispatch = useAppDispatch();
 
     const { mode, snackbar } = useAppSelector(state => state.utils);
+    const { user, isAuth } = useAppSelector(state => state.auth);
+
+    const [isAlertOpen, setIsAlertOpen] = useState<boolean>(true);
 
     const theme = useMemo(
         () =>
@@ -69,6 +72,10 @@ export const MainTheme = ({ children }: MainThemeProps) => {
         [mode]
     );
 
+    const handleCloseActivateAlert = () => {
+        setIsAlertOpen(false);
+    }
+
     const snackbarCloseHandle = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
@@ -82,6 +89,15 @@ export const MainTheme = ({ children }: MainThemeProps) => {
             <Fragment>
                 <CssBaseline />
                 <NavBar />
+                <Collapse in={isAuth && !user.isActivated && isAlertOpen}>
+                    <Alert
+                        variant="standard"
+                        severity="warning"
+                        onClose={handleCloseActivateAlert}
+                    >
+                        {t("Your progress in games is not saved, to do this, activate your account by clicking on the link that was sent to your mail after registration.")}
+                    </Alert>
+                </Collapse>
                 <Box component="main" sx={{ flexGrow: 1, p: 0, mb: '40px' }}>
                     <Snackbar
                         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

@@ -23,7 +23,7 @@ export const Game = () => {
     });
 
     const saveScoreEventHandler = (e: any) => {
-        if (params.gameId !== undefined) {
+        if (params.gameId !== undefined && user.isActivated && Number(e.detail) > 0) {
             dispatch(saveScore({
                 gameId: params.gameId,
                 score: e.detail,
@@ -50,7 +50,7 @@ export const Game = () => {
             }));
         }
 
-        if (isAuth) {
+        if (isAuth && user.isActivated) {
             const userScoreIndex = userScores.findIndex(userScore => userScore.gameId === params.gameId);
             if (userScoreIndex === -1 && params.gameId !== undefined) {
                 dispatch(getUserScore({ gameId: params.gameId }));
