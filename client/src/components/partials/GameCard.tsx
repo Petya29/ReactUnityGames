@@ -1,7 +1,8 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { Game } from "../../models/entities"
+import { useHover } from "../../hooks/user-hover"
 
 type GameCardProps = {
     game: Game
@@ -11,18 +12,37 @@ export const GameCard = ({ game }: GameCardProps) => {
 
     const { t } = useTranslation();
 
+    const { hovered, ref: hoverRef } = useHover();
+
     return (
         <Card>
-            <CardHeader title={game.name} subheader={t("try to play")} />
-            <CardMedia
-                sx={{
-                    height: "240px",
-                    width: "320px"
-                }}
-                component="img"
-                image={`../../../public/games/${game.id}/preview.jpg`}
-                alt="preview"
-            />
+            <CardHeader title={game.name} subheader={t("Hover to preview")} />
+            <Box ref={hoverRef}>
+                {hovered
+                    ?
+                    <CardMedia
+                        sx={{
+                            height: "240px",
+                            width: "320px"
+                        }}
+                        component="video"
+                        image={`../../../public/games/${game.id}/preview.mp4`}
+                        autoPlay
+                        muted
+                        loop
+                    />
+                    :
+                    <CardMedia
+                        sx={{
+                            height: "240px",
+                            width: "320px"
+                        }}
+                        component="img"
+                        image={`../../../public/games/${game.id}/preview.jpg`}
+                        alt="preview"
+                    />
+                }
+            </Box>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {game.description}
