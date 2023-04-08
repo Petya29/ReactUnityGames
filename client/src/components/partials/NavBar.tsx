@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppBar, Box, FormControl, MenuItem, Select, SelectChangeEvent, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, FormControl, MenuItem, Select, SelectChangeEvent, Stack, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Lang } from "../../models/entities";
@@ -65,18 +65,20 @@ export const NavBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="sticky" sx={{ zIndex: 1100 }}>
                 <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Typography
-                        component={NavLink}
-                        to='/'
-                        variant="h4"
-                        sx={{
-                            display: 'flex',
-                            mr: 2,
-                            cursor: 'pointer'
-                        }}
-                    >
-                        SiteName
-                    </Typography>
+                    <Tooltip title="Made by Petro Avramenko and Kolesnichenko Yehor" arrow>
+                        <Typography
+                            component={NavLink}
+                            to='/'
+                            variant="h4"
+                            sx={{
+                                display: 'flex',
+                                mr: 2,
+                                cursor: 'pointer'
+                            }}
+                        >
+                            PAKY
+                        </Typography>
+                    </Tooltip>
                     <Stack direction='row' sx={{ display: { xs: 'none', md: 'flex' }, gap: '60px' }}>
                         <Typography
                             component={NavLink}
