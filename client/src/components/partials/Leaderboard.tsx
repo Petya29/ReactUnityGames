@@ -1,6 +1,6 @@
-import { Box, Card, CardActions, CardContent, CardHeader, Divider } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
+import { Box, Card, CardActions, CardContent, CardHeader, Divider, Typography } from "@mui/material";
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../hooks/redux";
 
@@ -35,6 +35,15 @@ export const Leaderboard = ({ gameId }: LeadershipProps) => {
                         <Divider sx={{ my: '2px' }} />
                     </Fragment>
                 ))}
+                {!scores.filter(score => score.gameId === gameId).length
+                    ?
+                    <Typography>
+                        {t('No one from your region has set a record yet')}
+                        <SentimentVeryDissatisfiedIcon />
+                    </Typography>
+                    :
+                    ""
+                }
             </CardContent>
             <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>{t("Your score: ")}</Typography>

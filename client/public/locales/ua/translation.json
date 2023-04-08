@@ -22,5 +22,6 @@
     "region: ": "регіон: ",
     "Your score: ": "Ваш рахунок: ",
     "Hover to preview": "Наведіть курсор, щоб переглянути",
-    "Your progress in games is not saved, to do this, activate your account by clicking on the link that was sent to your mail after registration.": "Ваш прогрес в іграх не зберігається, для цього активуйте свій обліковий запис перейшовши за посиланням, яке було вислано вам на пошту після реєстрації."
+    "Your progress in games is not saved, to do this, activate your account by clicking on the link that was sent to your mail after registration.": "Ваш прогрес в іграх не зберігається, для цього активуйте свій обліковий запис перейшовши за посиланням, яке було вислано вам на пошту після реєстрації.",
+    "No one from your region has set a record yet": "Ще ніхто з вашого регіону не поставив рекорд"
 }
