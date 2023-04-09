@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    env_file:
+      - ./server/.env
+    environment:
+      PG_DATA: ./DB/pgdata:/var/lib/postgresql/data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ReactUnityGames
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./DB/pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5001:5001
+    networks:
+      - app-network
+
+  client:
+    container_name: client
+    image: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    env_file:
+      - ./client/.env
+    volumes:
+      - ./client:/app
+      - /client/app/node_modules
+    ports:
+      - 8080:8080
+    command: npm run dev
+    networks:
+      - app-network
+
+  server:
+    container_name: server
+    image: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server:/app
+      - /server/app/node_modules
+    ports:
+      - 5000:5000
+    command: npm run dev
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
