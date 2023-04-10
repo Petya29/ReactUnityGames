@@ -12,36 +12,36 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ReactUnityGames
     ports:
-      - '5432:5432'
+      - '8000:8000'
     volumes:
       - ./DB/pgdata:/var/lib/postgresql/data
     networks:
       - app-network
   
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 5001:5001
-    networks:
-      - app-network
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8070:8070
+  #   networks:
+  #     - app-network
 
-  client:
-    container_name: client
-    image: client
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    env_file:
-      - ./client/.env
-    volumes:
-      - ./client:/app
-      - /client/app/node_modules
-    ports:
-      - 8080:8080
-    command: npm run dev
-    networks:
-      - app-network
+  # client:
+  #   container_name: client
+  #   image: client
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   env_file:
+  #     - ./client/.env
+  #   volumes:
+  #     - ./client:/app
+  #     - /client/app/node_modules
+  #   ports:
+  #     - 8080:8080
+  #   command: npm run dev
+  #   networks:
+  #     - app-network
 
   server:
     container_name: server
@@ -55,7 +55,7 @@ services:
       - ./server:/app
       - /server/app/node_modules
     ports:
-      - 5000:5000
+      - 7000:7000
     command: npm run dev
     networks:
       - app-network
