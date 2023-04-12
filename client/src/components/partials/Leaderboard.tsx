@@ -12,7 +12,7 @@ export const Leaderboard = ({ gameId }: LeadershipProps) => {
 
     const { t } = useTranslation();
 
-    const { user } = useAppSelector(state => state.auth);
+    const { user, isAuth } = useAppSelector(state => state.auth);
     const { scores, userScores } = useAppSelector(state => state.game);
 
     return (
@@ -45,10 +45,12 @@ export const Leaderboard = ({ gameId }: LeadershipProps) => {
                     ""
                 }
             </CardContent>
-            <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography>{t("Your score: ")}</Typography>
-                <Typography>{userScores.find(score => score.gameId === gameId)?.score || 0}</Typography>
-            </CardActions>
+            {isAuth && (
+                <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography>{t("Your score: ")}</Typography>
+                    <Typography>{userScores.find(score => score.gameId === gameId)?.score || 0}</Typography>
+                </CardActions>
+            )}
         </Card>
     )
 }

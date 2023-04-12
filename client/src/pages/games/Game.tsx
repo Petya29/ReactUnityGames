@@ -16,10 +16,10 @@ export const Game = () => {
     const { scores, userScores } = useAppSelector(state => state.game);
 
     const { unityProvider, UNSAFE__detachAndUnloadImmediate, isLoaded } = useUnityContext({
-        loaderUrl: `../../../public/games/${params.gameId}/Dip.loader.js`,
-        dataUrl: `../../../public/games/${params.gameId}/Dip.data`,
-        frameworkUrl: `../../../public/games/${params.gameId}/Dip.framework.js`,
-        codeUrl: `../../../public/games/${params.gameId}/Dip.wasm`,
+        loaderUrl: `/games/${params.gameId}/Dip.loader.js`,
+        dataUrl: `/games/${params.gameId}/Dip.data`,
+        frameworkUrl: `/games/${params.gameId}/Dip.framework.js`,
+        codeUrl: `/games/${params.gameId}/Dip.wasm`,
     });
 
     const saveScoreEventHandler = (e: any) => {

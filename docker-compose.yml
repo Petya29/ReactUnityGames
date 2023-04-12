@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres_paky
     image: postgres:14
     env_file:
       - ./server/.env
@@ -18,13 +18,13 @@ services:
     networks:
       - app-network
   
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8070:8070
-  #   networks:
-  #     - app-network
+  adminer:
+    image: adminer_paky
+    restart: always
+    ports:
+      - 8070:8080
+    networks:
+      - app-network
 
   # client:
   #   container_name: client

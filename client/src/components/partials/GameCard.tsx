@@ -26,7 +26,7 @@ export const GameCard = ({ game }: GameCardProps) => {
                             width: "320px"
                         }}
                         component="video"
-                        image={`../../../public/games/${game.id}/preview.mp4`}
+                        image={`/games/${game.id}/preview.mp4`}
                         autoPlay
                         muted
                         loop
@@ -38,7 +38,7 @@ export const GameCard = ({ game }: GameCardProps) => {
                             width: "320px"
                         }}
                         component="img"
-                        image={`../../../public/games/${game.id}/preview.jpg`}
+                        image={`/games/${game.id}/preview.jpg`}
                         alt="preview"
                     />
                 }
