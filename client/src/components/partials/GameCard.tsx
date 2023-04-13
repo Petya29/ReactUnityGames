@@ -17,13 +17,13 @@ export const GameCard = ({ game }: GameCardProps) => {
     return (
         <Card>
             <CardHeader title={game.name} subheader={t("Hover to preview")} />
-            <Box ref={hoverRef}>
+            <Box ref={hoverRef} sx={{ display: "flex", justifyContent: "center" }}>
                 {hovered
                     ?
                     <CardMedia
                         sx={{
                             height: "240px",
-                            width: "320px"
+                            width: "340px"
                         }}
                         component="video"
                         image={`/games/${game.id}/preview.mp4`}
@@ -35,7 +35,7 @@ export const GameCard = ({ game }: GameCardProps) => {
                     <CardMedia
                         sx={{
                             height: "240px",
-                            width: "320px"
+                            width: "340px"
                         }}
                         component="img"
                         image={`/games/${game.id}/preview.jpg`}
