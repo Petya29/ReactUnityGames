@@ -12,7 +12,8 @@ const isPrefersDarkMode = () => {
 
 const defineMode = (mode: Mode | undefined) => {
     if (mode !== undefined) return mode;
-    return isPrefersDarkMode() ? 'dark' : 'light';
+    //return isPrefersDarkMode() ? 'dark' : 'light';
+    return 'dark';
 }
 
 type TransitionProps = Omit<SlideProps, 'direction'>;
@@ -98,7 +99,7 @@ export const MainTheme = ({ children }: MainThemeProps) => {
                         {t("Your progress in games is not saved, to do this, activate your account by clicking on the link that was sent to your mail after registration.")}
                     </Alert>
                 </Collapse>
-                <Box component="main" sx={{ flexGrow: 1, p: 0, mb: '40px' }}>
+                <Box component="main" sx={{ flexGrow: 1, p: 0, pb: '40px' }}>
                     <Snackbar
                         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={snackbar.open}

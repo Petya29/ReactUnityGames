@@ -63,7 +63,14 @@ export const NavBar = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky" sx={{ zIndex: 1100 }}>
+            <AppBar
+                position="sticky"
+                sx={{
+                    zIndex: 1100,
+                    backgroundColor: "#d200fa54",
+                    textShadow: "rgb(0, 0, 0) 3px 2px 1px"
+                }}
+                >
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <Tooltip title="Made by Petro Avramenko and Kolesnichenko Yehor" arrow>
                         <Typography

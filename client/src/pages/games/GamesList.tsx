@@ -46,7 +46,7 @@ export const GamesList = () => {
           display: "flex",
           alignItems: "flex-end"
         }}>
-          <CircularProgress />
+          <CircularProgress sx={{ color: '#d200fa' }} />
         </Box>
         :
         games.map(game => (

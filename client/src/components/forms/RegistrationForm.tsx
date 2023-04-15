@@ -12,19 +12,23 @@ export const RegistrationForm = () => {
     const { registrationInitialValues, registrationValidationSchema, onSubmit } = useRegistrationForm();
 
     const formik = useFormik({
-      initialValues: registrationInitialValues,
-      validationSchema: registrationValidationSchema,
-      onSubmit: onSubmit
+        initialValues: registrationInitialValues,
+        validationSchema: registrationValidationSchema,
+        onSubmit: onSubmit
     });
 
     return (
         <div className="text-white">
             <Card sx={{ maxWidth: '540px' }}>
                 <CardContent>
-                    <Avatar sx={{ m: 'auto', bgcolor: '#1976d2' }}>
+                    <Avatar sx={{ m: "auto", bgcolor: "#d200fa" }}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+                    <Typography
+                        component="h1"
+                        variant="h5"
+                        sx={{ textAlign: 'center', color: "#d200fa" }}
+                    >
                         {t('Sign Up')}
                     </Typography>
                     <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
@@ -82,8 +86,18 @@ export const RegistrationForm = () => {
                         <Button
                             type="submit"
                             fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            variant="outlined"
+                            sx={{
+                                mt: 3,
+                                mb: 2,
+                                borderColor: "#d200fad1",
+                                color: "#d200fa",
+                                "&:hover": {
+                                    backgroundColor: "#d200fa29",
+                                    borderColor: "#d200fa"
+
+                                },
+                            }}
                             disabled={formik.isSubmitting}
                             endIcon={
                                 formik.isSubmitting

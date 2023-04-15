@@ -16,7 +16,7 @@ export const GameCard = ({ game }: GameCardProps) => {
 
     return (
         <Card>
-            <CardHeader title={game.name} subheader={t("Hover to preview")} />
+            <CardHeader sx={{ color: "#d200fa" }} title={game.name} subheader={t("Hover to preview")} />
             <Box ref={hoverRef} sx={{ display: "flex", justifyContent: "center" }}>
                 {hovered
                     ?
@@ -52,7 +52,17 @@ export const GameCard = ({ game }: GameCardProps) => {
                 <Button
                     component={Link}
                     to={"/games/" + game.id}
-                    variant="contained"
+                    variant="outlined"
+                    color="success"
+                    sx={{
+                        borderColor: "#d200fad1",
+                        color: "#d200fa",
+                        "&:hover": {
+                            backgroundColor: "#d200fa29",
+                            borderColor:"#d200fa"
+                 
+                        },
+                    }}
                 >
                     {t("Go game")}
                 </Button>
