@@ -17,7 +17,7 @@ export const Leaderboard = ({ gameId }: LeadershipProps) => {
 
     return (
         <Card sx={{ height: 'fit-content', width: '260px' }}>
-            <CardHeader title={t("Leaderboard")} subheader={t("region: ") + user.region} />
+            <CardHeader title={t("Leaderboard")} subheader={t("region: ") + (user.region || 'Europe')} />
             <Divider />
             <CardContent>
                 {scores.filter(score => score.gameId === gameId).map(score => (
