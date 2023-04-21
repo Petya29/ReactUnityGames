@@ -28,36 +28,56 @@ class GameService {
     ) {
         await this.isGameExists(gameId);
 
-        const newScore = await prisma.userScores.upsert({
+        const userScore = await prisma.userScores.findFirst({
             where: {
-                userId_gameId_region: {
-                    userId: userId,
-                    gameId: gameId,
-                    region: region
-                }
-            },
-            include: {
-                user: {
-                    select: {
-                        id: true,
-                        nickname: true
-                    }
-                }
-            },
-            update: {
-                level: Number(level),
-                score: {
-                    increment: Number(score)
-                }
-            },
-            create: {
                 userId: userId,
                 gameId: gameId,
-                level: Number(level),
-                score: Number(score),
                 region: region
             }
         });
+
+        let newScore = {}
+        if (userScore) {
+            newScore = await prisma.userScores.update({
+                where: {
+                    userId_gameId_region: {
+                        userId: userId,
+                        gameId: gameId,
+                        region: region
+                    }
+                },
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            nickname: true
+                        }
+                    }
+                },
+                data: {
+                    level: Number(level),
+                    score: Number(score) > userScore.score ? Number(score) : userScore.score,
+                }
+            });
+        } else {
+            newScore = await prisma.userScores.create({
+                data: {
+                    userId: userId,
+                    gameId: gameId,
+                    level: Number(level),
+                    score: Number(score),
+                    region: region
+                },
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            nickname: true
+                        }
+                    }
+                }
+            });
+        }
 
         return newScore;
     }
@@ -86,7 +106,7 @@ class GameService {
         return score;
     }
 
-    async getManyScores(gameId: string, region: string){
+    async getManyScores(gameId: string, region: string) {
         await this.isGameExists(gameId);
 
         const scores = await prisma.userScores.findMany({
