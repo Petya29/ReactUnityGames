@@ -413,6 +413,117 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "achievement",
+			"item": [
+				{
+					"name": "/api/achievement/get-game-achievements/:gameId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/achievement/get-game-achievements/:gameId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"achievement",
+								"get-game-achievements",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId",
+									"value": "aaa97fb7-9a0a-4216-87a0-57013b2e8900"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/achievement/get-user-achievements",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZTNiMjI5LWYzODEtNGNjMS1hOTE2LTA5MzI2ZTI0NGZhZiIsIm5pY2tuYW1lIjoiUGV0eWEgQXZyYW1lbmtvIDMiLCJlbWFpbCI6InBldHlhMjM5YXZyYW1lbmtvQGdtYWlsLmNvbSIsImlzQWN0aXZhdGVkIjp0cnVlLCJyb2xlIjoiVVNFUiIsInJlZ2lvbiI6InVhIiwibGFuZyI6ImVuIiwiaWF0IjoxNjc5ODc2ODIxLCJleHAiOjE2Nzk4OTEyMjF9.EhXqaOtKVJ7FBd1P0k0sHnze9_HOQrfI06Y7jhaJeHE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/achievement/get-user-achievements",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"achievement",
+								"get-user-achievements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/achievement/save-user-achievement/:achievementId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZTNiMjI5LWYzODEtNGNjMS1hOTE2LTA5MzI2ZTI0NGZhZiIsIm5pY2tuYW1lIjoiUGV0eWEgQXZyYW1lbmtvIDMiLCJlbWFpbCI6InBldHlhMjM5YXZyYW1lbmtvQGdtYWlsLmNvbSIsImlzQWN0aXZhdGVkIjp0cnVlLCJyb2xlIjoiVVNFUiIsInJlZ2lvbiI6InVhIiwibGFuZyI6ImVuIiwiaWF0IjoxNjc5ODc2ODIxLCJleHAiOjE2Nzk4OTEyMjF9.EhXqaOtKVJ7FBd1P0k0sHnze9_HOQrfI06Y7jhaJeHE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/achievement/save-user-achievement/:achievementId",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"achievement",
+								"save-user-achievement",
+								":achievementId"
+							],
+							"variable": [
+								{
+									"key": "achievementId",
+									"value": "efa97fb7-9a0a-4216-87a0-57013b2e8968"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
